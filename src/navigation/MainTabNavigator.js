@@ -4,11 +4,13 @@ import {
   FileText,
   ClipboardList,
   BarChart2,
+  BookOpenText,
   User,
 } from 'lucide-react-native';
 import DashboardScreen from '../screens/Dashboard';
 import ConsultationFormScreen from '../screens/Consultation/ConsultationFormScreen';
 import EvaluationFormScreen from '../screens/Evaluation/EvaluationFormScreen';
+import ProfileScreen from '../screens/Profile';
 
 const Tab = createBottomTabNavigator();
 
@@ -20,7 +22,7 @@ const MainTabNavigator = () => {
           if (route.name === 'Dashboard') {
             return <Home color={color} size={size} />;
           } else if (route.name === 'Consultation') {
-            return <FileText color={color} size={size} />;
+            return <BookOpenText color={color} size={size} />;
           } else if (route.name === 'Evaluation') {
             return <ClipboardList color={color} size={size} />;
           } else if (route.name === 'Reports') {
@@ -36,7 +38,7 @@ const MainTabNavigator = () => {
       <Tab.Screen name="Dashboard" component={DashboardScreen} />
       <Tab.Screen name="Consultation" component={ConsultationFormScreen} />
       <Tab.Screen name="Evaluation" component={EvaluationFormScreen} />
-      {/* Add Reports and Profile if you have corresponding screens */}
+      <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>
   );
 };
