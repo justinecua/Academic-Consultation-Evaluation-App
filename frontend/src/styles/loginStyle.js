@@ -1,84 +1,125 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+import { moderateScale, scale, verticalScale } from 'react-native-size-matters';
+
+const { width } = Dimensions.get('window');
 
 export const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#F8FAFC',
+    flexGrow: 1,
+    backgroundColor: '#fff',
+    paddingVertical: verticalScale(30),
+    paddingHorizontal: scale(20),
   },
   content: {
     flex: 1,
     justifyContent: 'center',
-    paddingHorizontal: 40,
+    maxWidth: scale(400),
+    alignSelf: 'center',
+    width: '100%',
+  },
+  headerSection: {
+    alignItems: 'center',
+    marginBottom: verticalScale(40),
   },
   logoContainer: {
-    alignItems: 'center',
-    marginBottom: 24,
-  },
-  logo: {
-    width: 80,
-    height: 80,
-  },
-  header: {
-    alignItems: 'center',
-    marginBottom: 32,
-  },
-  title: {
-    fontSize: 36,
-    fontWeight: '700',
-    color: '#2D3748',
-    letterSpacing: -0.5,
-  },
-  subtitle: {
-    fontSize: 16,
-    color: '#718096',
-    marginTop: 8,
-  },
-  inputContainer: {
-    marginBottom: 24,
-  },
-  inputLabel: {
-    fontSize: 14,
-    fontWeight: '500',
-    color: '#4A5568',
-    marginBottom: 8,
-  },
-  input: {
-    height: 48,
-    fontSize: 16,
-    color: '#1A202C',
-    paddingBottom: 8,
-  },
-  inputUnderline: {
-    height: 2,
-    backgroundColor: '#E2E8F0',
-    marginTop: 4,
-  },
-  button: {
-    height: 52,
-    borderRadius: 12,
-    backgroundColor: '#5E72E4',
+    width: scale(70),
+    height: scale(70),
+    marginBottom: verticalScale(12),
+    backgroundColor: '#FFFFFF',
+    borderRadius: moderateScale(12),
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 16,
-    shadowColor: '#5E72E4',
-    shadowOffset: { width: 0, height: 4 },
+    borderWidth: 1,
+    borderColor: '#E5E7EB',
+  },
+  logo: {
+    width: '60%',
+    height: '60%',
+  },
+  textContainer: {
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: moderateScale(50),
+    fontFamily: 'BillionDreams_PERSONAL',
+    color: '#1E3A8A',
+    marginBottom: verticalScale(6),
+  },
+  subtitle: {
+    textAlign: 'center',
+    color: '#1E3A8A',
+    fontSize: moderateScale(14),
+    lineHeight: verticalScale(20),
+    maxWidth: scale(280),
+    fontFamily: 'Nunito-SemiBold',
+    lineHeight: 22,
+  },
+  formSection: {
+    marginBottom: verticalScale(20),
+  },
+  inputContainer: {
+    marginBottom: verticalScale(10),
+  },
+
+  inputWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 1.5,
+    borderColor: '#E5E7EB',
+    borderRadius: moderateScale(12),
+    paddingHorizontal: scale(14),
+    backgroundColor: '#FFFFFF',
+    height: 60,
+    elevation: 1,
+  },
+  inputFocused: {
+    borderColor: '#1E3A8A',
+    shadowColor: '#1E3A8A',
     shadowOpacity: 0.2,
-    shadowRadius: 8,
-    elevation: 4,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  input: {
+    flex: 1,
+    paddingVertical: verticalScale(8),
+    paddingHorizontal: scale(8),
+    fontSize: moderateScale(15),
+    color: '#1E3A8A',
+    fontFamily: 'Nunito-SemiBold',
+  },
+  visibilityToggle: {
+    padding: scale(6),
+    marginLeft: scale(4),
+  },
+  button: {
+    backgroundColor: '#1E3A8A',
+    paddingVertical: verticalScale(14),
+    borderRadius: moderateScale(12),
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: 50,
+    elevation: 5,
+  },
+  buttonDisabled: {
+    backgroundColor: '#27428bff',
+    elevation: 0,
   },
   buttonText: {
     color: '#FFFFFF',
-    fontSize: 16,
     fontWeight: '600',
-    letterSpacing: 0.5,
+    fontSize: moderateScale(15),
+  },
+  footer: {
+    paddingVertical: verticalScale(14),
+    alignItems: 'center',
+    borderTopWidth: 1,
+    borderTopColor: '#E5E7EB',
+    backgroundColor: '#fff',
   },
   footerText: {
+    fontSize: moderateScale(11),
+    color: '#6B7280',
     textAlign: 'center',
-    marginTop: 32,
-    color: '#718096',
-  },
-  footerLink: {
-    color: '#5E72E4',
-    fontWeight: '600',
+    fontFamily: 'Nunito-SemiBold',
   },
 });

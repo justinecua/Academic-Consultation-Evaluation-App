@@ -24,3 +24,20 @@ export async function getProfile(token) {
     throw error;
   }
 }
+
+export async function logout(refreshToken, accessToken) {
+  try {
+    const response = await axios.post(
+      `${API_URL}/logout/`,
+      { refresh: refreshToken },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      },
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}

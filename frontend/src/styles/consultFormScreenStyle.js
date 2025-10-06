@@ -1,13 +1,19 @@
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
+  mainTitle: {
+    fontSize: 16,
+    fontWeight: '700',
+    textAlign: 'center',
+    color: '#333',
+  },
   container: {
     flex: 1,
     backgroundColor: '#F8FAFC',
   },
   scrollContainer: {
     padding: 15,
-    paddingBottom: 40,
+    paddingBottom: 80,
   },
   header: {
     flexDirection: 'row',
@@ -20,8 +26,21 @@ export const styles = StyleSheet.create({
     color: '#2D3748',
     marginLeft: 16,
   },
+  MainSection: {
+    marginBottom: 15,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 12,
+    padding: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 8,
+    elevation: 2,
+    marginTop: 20,
+  },
+
   section: {
-    marginBottom: 32,
+    marginBottom: 15,
     backgroundColor: '#FFFFFF',
     borderRadius: 12,
     padding: 20,
@@ -47,7 +66,7 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '500',
     color: '#4A5568',
-    marginBottom: 8,
+    marginBottom: 10,
   },
 
   input: {
@@ -84,7 +103,7 @@ export const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 16,
     alignItems: 'center',
-    marginTop: 16,
+    marginTop: 4,
   },
   submitText: {
     color: '#FFFFFF',

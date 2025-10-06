@@ -43,3 +43,20 @@ export async function getEvaluationDetail(token, id) {
   });
   return res.data;
 }
+
+export const downloadEvaluationPDF = async (token, id) => {
+  const res = await fetch(
+    `${API_URL}/evaluation/my-evaluations/${id}/download/`,
+    {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
+
+  if (!res.ok) throw new Error('Failed to fetch PDF');
+
+  const arrayBuffer = await res.arrayBuffer();
+  return Buffer.from(arrayBuffer).toString('base64');
+};

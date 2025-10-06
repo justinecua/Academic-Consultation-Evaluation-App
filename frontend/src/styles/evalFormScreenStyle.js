@@ -1,9 +1,21 @@
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
+  MainSection: {
+    marginBottom: 15,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 12,
+    padding: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 8,
+    elevation: 2,
+    marginTop: 20,
+  },
   mainTitle: {
     fontSize: 16,
-    fontWeight: '900',
+    fontWeight: '700',
     textAlign: 'center',
     color: '#333',
   },
@@ -14,7 +26,7 @@ export const styles = StyleSheet.create({
   },
   scrollContainer: {
     padding: 15,
-    paddingBottom: 40,
+    paddingBottom: 70,
   },
   header: {
     flexDirection: 'row',
@@ -28,15 +40,15 @@ export const styles = StyleSheet.create({
     marginLeft: 16,
   },
   section: {
-    marginBottom: 10,
+    marginBottom: 15,
     backgroundColor: '#FFFFFF',
     borderRadius: 12,
     padding: 20,
-    // shadowColor: '#000',
-    // shadowOffset: { width: 0, height: 2 },
-    // shadowOpacity: 0.05,
-    // shadowRadius: 8,
-    // elevation: 2,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 8,
+    elevation: 2,
   },
   sectionTitle: {
     fontSize: 18,
