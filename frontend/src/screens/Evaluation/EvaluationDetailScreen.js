@@ -6,8 +6,8 @@ import {
   ScrollView,
   ActivityIndicator,
   RefreshControl,
+  TouchableOpacity,
 } from 'react-native';
-import { getEvaluationDetail } from '../../api/services/evaluation';
 import { AuthContext } from '../../context/AuthContext';
 import {
   User,
@@ -15,13 +15,18 @@ import {
   Building,
   MapPin,
   Calendar,
-  Clock,
   MessageSquare,
-  Star,
-  Award,
-  FileText,
+  Download,
 } from 'lucide-react-native';
 import { styles } from '../../styles/evaluationDetailScreen';
+import {
+  getEvaluationDetail,
+  downloadEvaluationPDF,
+} from '../../api/services/evaluation';
+import RNFS from 'react-native-fs';
+import RNPrint from 'react-native-print';
+import * as Burnt from 'burnt';
+import { Buffer } from 'buffer';
 
 const EvaluationDetailScreen = ({ route }) => {
   const { id } = route.params;
@@ -30,12 +35,32 @@ const EvaluationDetailScreen = ({ route }) => {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
 
+  const handleDownloadPDF = async () => {
+    try {
+      global.Buffer = global.Buffer || Buffer;
+
+      const arrayBuffer = await downloadEvaluationPDF(accessToken, id);
+      const base64Data = Buffer.from(arrayBuffer, 'binary').toString('base64');
+      const localFile = `${RNFS.DocumentDirectoryPath}/evaluation_${id}.pdf`;
+
+      await RNFS.writeFile(localFile, base64Data, 'base64');
+      await RNPrint.print({ filePath: localFile });
+    } catch (error) {
+      console.error('Download Evaluation PDF error:', error);
+      Burnt.toast({
+        title: 'Failed to open PDF file',
+        preset: 'error',
+      });
+    }
+  };
+
   const fetchDetail = async (isRefresh = false) => {
     if (!isRefresh) setLoading(true);
     else setRefreshing(true);
 
     try {
       const res = await getEvaluationDetail(accessToken, id);
+      console.log(res);
       setEvaluation(res);
     } catch (error) {
     } finally {
@@ -70,9 +95,9 @@ const EvaluationDetailScreen = ({ route }) => {
   };
 
   const getRatingColor = rating => {
-    if (rating >= 4) return '#38A169'; // Green
-    if (rating >= 3) return '#D69E2E'; // Yellow
-    return '#E53E3E'; // Red
+    if (rating >= 4) return '#38A169';
+    if (rating >= 3) return '#D69E2E';
+    return '#E53E3E';
   };
 
   const getOverallRatingColor = rating => {
@@ -122,6 +147,19 @@ const EvaluationDetailScreen = ({ route }) => {
       }
       showsVerticalScrollIndicator={false}
     >
+      {/* Header with Actions */}
+      <View style={styles.header}>
+        <Text style={styles.headerTitle}>{evaluation.teacher_name}</Text>
+        <View style={styles.actionButtons}>
+          <TouchableOpacity
+            onPress={handleDownloadPDF}
+            style={styles.iconButton}
+          >
+            <Download size={20} color="#6B7280" />
+          </TouchableOpacity>
+        </View>
+      </View>
+
       {/* Basic Information Card */}
       <View style={styles.card}>
         <Text style={styles.cardTitle}>Basic Information</Text>

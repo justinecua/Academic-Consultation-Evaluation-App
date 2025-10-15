@@ -96,7 +96,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     textAlign: 'right',
   },
-  // Schedule Styles
+
   scheduleContainer: {
     gap: 12,
   },

@@ -1,5 +1,5 @@
-import { RFValue } from 'react-native-responsive-fontsize';
 import { StyleSheet } from 'react-native';
+import { getFontSize } from '../utils/font';
 
 export const styles = StyleSheet.create({
   container: {
@@ -14,13 +14,13 @@ export const styles = StyleSheet.create({
     borderBottomColor: '#E2E8F0',
   },
   headerTitle: {
-    fontSize: 24,
+    fontSize: getFontSize(24),
     fontWeight: '700',
     color: '#2D3748',
     marginBottom: 4,
   },
   headerSubtitle: {
-    fontSize: 16,
+    fontSize: getFontSize(16),
     color: '#718096',
     fontWeight: '400',
   },
@@ -32,7 +32,7 @@ export const styles = StyleSheet.create({
   },
   loadingText: {
     marginTop: 16,
-    fontSize: 16,
+    fontSize: getFontSize(16),
     color: '#718096',
     fontWeight: '500',
   },
@@ -50,7 +50,7 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.05,
     shadowRadius: 3,
     elevation: 1,
-    marginTop: 10,
+    marginTop: 2,
   },
   itemContent: {
     flex: 1,
@@ -67,7 +67,7 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   teacherName: {
-    fontSize: 14,
+    fontSize: getFontSize(14),
     color: '#4A5568',
     fontWeight: '500',
     marginLeft: 6,
@@ -80,11 +80,11 @@ export const styles = StyleSheet.create({
     marginLeft: 8,
   },
   ratingText: {
-    fontSize: 12,
+    fontSize: getFontSize(12),
     fontWeight: '600',
   },
   title: {
-    fontSize: 16,
+    fontSize: getFontSize(12),
     fontWeight: '600',
     color: '#2D3748',
     marginBottom: 12,
@@ -99,7 +99,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   footerText: {
-    fontSize: 13,
+    fontSize: getFontSize(13),
     color: '#718096',
     marginLeft: 6,
   },
@@ -130,16 +130,16 @@ export const styles = StyleSheet.create({
     borderColor: '#E2E8F0',
   },
   emptyTitle: {
-    fontSize: 18,
+    fontSize: getFontSize(18),
     fontWeight: '600',
     color: '#2D3748',
     marginBottom: 8,
   },
   emptySubtitle: {
-    fontSize: 16,
+    fontSize: getFontSize(16),
     color: '#718096',
     textAlign: 'center',
-    lineHeight: 22,
+    lineHeight: getFontSize(22),
     marginBottom: 24,
   },
   refreshButton: {
@@ -150,7 +150,7 @@ export const styles = StyleSheet.create({
   },
   refreshButtonText: {
     color: '#FFFFFF',
-    fontSize: 16,
+    fontSize: getFontSize(16),
     fontWeight: '600',
   },
 });

@@ -1,6 +1,14 @@
+
 apply plugin: "com.android.application"
 apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.facebook.react"
+
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
+
+project.ext.react = [
+    enableHermes: true,   // keep Hermes on
+    enableCodegen: false  // disable codegen for react-native-config to avoid build error
+]
 
 /**
  * This is the configuration block to customize your React Native Android app.

@@ -1,9 +1,11 @@
 import axios from 'axios';
-import API_URL from '../urls/urls';
+import Config from 'react-native-config';
+const BACKEND_API_URL = Config.BACKEND_API_URL;
 
+console.log('BACKEND_API_URL:', BACKEND_API_URL);
 export async function login(username, password) {
   try {
-    const response = await axios.post(`${API_URL}/login/`, {
+    const response = await axios.post(`${BACKEND_API_URL}/login/`, {
       username,
       password,
     });
@@ -16,7 +18,7 @@ export async function login(username, password) {
 
 export async function getProfile(token) {
   try {
-    const response = await axios.get(`${API_URL}/profile/`, {
+    const response = await axios.get(`${BACKEND_API_URL}/profile/`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     return response.data;
@@ -28,7 +30,7 @@ export async function getProfile(token) {
 export async function logout(refreshToken, accessToken) {
   try {
     const response = await axios.post(
-      `${API_URL}/logout/`,
+      `${BACKEND_API_URL}/logout/`,
       { refresh: refreshToken },
       {
         headers: {

@@ -1,11 +1,16 @@
 import axios from 'axios';
-import API_URL from '../urls/urls';
+import Config from 'react-native-config';
+const BACKEND_API_URL = Config.BACKEND_API_URL;
 
 export async function submitConsultation(data, token) {
   try {
-    const response = await axios.post(`${API_URL}/consultation/submit/`, data, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const response = await axios.post(
+      `${BACKEND_API_URL}/consultation/submit/`,
+      data,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    );
     return response.data;
   } catch (error) {
     throw error.response?.data || { error: 'Something went wrong' };
@@ -15,7 +20,7 @@ export async function submitConsultation(data, token) {
 export async function getUserConsultations(token) {
   try {
     const response = await axios.get(
-      `${API_URL}/consultation/my-consultations/`,
+      `${BACKEND_API_URL}/consultation/my-consultations/`,
       {
         headers: { Authorization: `Bearer ${token}` },
       },
@@ -29,7 +34,7 @@ export async function getUserConsultations(token) {
 export async function getConsultationDetail(token, id) {
   try {
     const response = await axios.get(
-      `${API_URL}/consultation/my-consultations/${id}/`,
+      `${BACKEND_API_URL}/consultation/my-consultations/${id}/`,
       {
         headers: { Authorization: `Bearer ${token}` },
       },
@@ -45,7 +50,7 @@ export async function getConsultationDetail(token, id) {
 export async function deleteConsultation(token, id) {
   try {
     const response = await axios.delete(
-      `${API_URL}/consultation/my-consultations/${id}/delete/`,
+      `${BACKEND_API_URL}/consultation/my-consultations/${id}/delete/`,
       { headers: { Authorization: `Bearer ${token}` } },
     );
     return response.data;
@@ -57,10 +62,10 @@ export async function deleteConsultation(token, id) {
 export async function downloadConsultationPDF(token, id) {
   try {
     const response = await axios.get(
-      `${API_URL}/consultation/my-consultations/${id}/pdf/`,
+      `${BACKEND_API_URL}/consultation/my-consultations/${id}/pdf/`,
       {
         headers: { Authorization: `Bearer ${token}` },
-        responseType: 'arraybuffer', // <-- change this
+        responseType: 'arraybuffer',
       },
     );
     return response.data;

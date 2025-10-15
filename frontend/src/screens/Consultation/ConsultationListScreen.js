@@ -10,6 +10,7 @@ import {
 import { getUserConsultations } from '../../api/services/consultation';
 import { AuthContext } from '../../context/AuthContext';
 import { ChevronRight, Calendar, BookOpen, User } from 'lucide-react-native';
+import { getFontSize } from '../../utils/font';
 
 const ConsultationListScreen = ({ navigation }) => {
   const { accessToken } = useContext(AuthContext);
@@ -126,7 +127,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#FFFFFF',
   },
-  loadingText: { marginTop: 12, color: '#718096' },
+  loadingText: {
+    marginTop: 12,
+    color: '#718096',
+    fontSize: getFontSize(15),
+  },
   item: {
     flexDirection: 'row',
     backgroundColor: '#fff',
@@ -140,16 +145,26 @@ const styles = StyleSheet.create({
   itemContent: { flex: 1 },
   itemHeader: { flexDirection: 'row', justifyContent: 'space-between' },
   teacherInfo: { flexDirection: 'row', alignItems: 'center' },
-  teacherName: { marginLeft: 6, fontWeight: '500', color: '#2D3748' },
+  teacherName: {
+    marginLeft: 6,
+    fontWeight: '500',
+    color: '#2D3748',
+    fontSize: getFontSize(14),
+  },
   title: {
-    fontSize: 16,
+    fontSize: getFontSize(16),
     fontWeight: '600',
     marginVertical: 8,
     color: '#1A202C',
   },
+
   itemFooter: { flexDirection: 'row', justifyContent: 'space-between' },
   footerItem: { flexDirection: 'row', alignItems: 'center' },
-  footerText: { marginLeft: 6, color: '#718096' },
+  footerText: {
+    marginLeft: 6,
+    color: '#718096',
+    fontSize: getFontSize(13),
+  },
   chevronContainer: { justifyContent: 'center' },
   emptyList: {
     flexGrow: 1,

@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { RFValue } from 'react-native-responsive-fontsize';
+import { getFontSize } from '../utils/font';
 
 export const styles = StyleSheet.create({
   container: {
@@ -11,14 +11,14 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    paddingHorizontal: 20,
+    paddingVertical: 16,
     backgroundColor: '#FFFFFF',
-    paddingHorizontal: 16,
-    paddingVertical: 10,
     borderBottomWidth: 1,
-    borderBottomColor: '#E5E7EB',
+    borderBottomColor: '#F1F5F9',
   },
   headerTitle: {
-    fontSize: RFValue(14),
+    fontSize: getFontSize(14),
     fontWeight: '700',
     color: '#1E293B',
   },
@@ -36,7 +36,7 @@ export const styles = StyleSheet.create({
   },
   loadingText: {
     marginTop: 10,
-    fontSize: RFValue(12),
+    fontSize: getFontSize(12),
     color: '#64748B',
   },
 
@@ -47,12 +47,12 @@ export const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
   },
   errorText: {
-    fontSize: RFValue(13),
+    fontSize: getFontSize(13),
     fontWeight: '700',
     color: '#DC2626',
   },
   errorSubtext: {
-    fontSize: RFValue(11),
+    fontSize: getFontSize(11),
     color: '#64748B',
     marginTop: 3,
   },
@@ -69,7 +69,7 @@ export const styles = StyleSheet.create({
     elevation: 2,
   },
   cardTitle: {
-    fontSize: RFValue(13),
+    fontSize: getFontSize(15),
     fontWeight: '700',
     color: '#1E293B',
     marginBottom: 6,
@@ -88,12 +88,12 @@ export const styles = StyleSheet.create({
     marginBottom: 2,
   },
   infoLabel: {
-    fontSize: RFValue(10),
+    fontSize: getFontSize(14),
     color: '#64748B',
     marginLeft: 3,
   },
   infoValue: {
-    fontSize: RFValue(12),
+    fontSize: getFontSize(13),
     color: '#1E293B',
     fontWeight: '500',
   },
@@ -113,10 +113,14 @@ export const styles = StyleSheet.create({
     marginLeft: 5,
     color: '#475569',
     fontWeight: '600',
-    fontSize: RFValue(11),
+    fontSize: getFontSize(13),
   },
-  scheduleDate: { color: '#1E293B', fontWeight: '500', fontSize: RFValue(11) },
-  scheduleTime: { color: '#64748B', fontSize: RFValue(10) },
+  scheduleDate: {
+    color: '#1E293B',
+    fontWeight: '500',
+    fontSize: getFontSize(13),
+  },
+  scheduleTime: { color: '#64748B', fontSize: getFontSize(13) },
   scheduleDivider: {
     width: 1,
     backgroundColor: '#E2E8F0',
@@ -137,17 +141,18 @@ export const styles = StyleSheet.create({
     marginBottom: 5,
   },
   ratingNumber: {
-    fontSize: RFValue(18),
+    fontSize: getFontSize(18),
     fontWeight: '700',
     color: '#FFFFFF',
   },
   ratingLabel: {
-    fontSize: RFValue(12),
+    fontSize: getFontSize(14),
     fontWeight: '600',
     color: '#1E293B',
   },
   ratingSubtext: {
-    fontSize: RFValue(10),
+    marginTop: 5,
+    fontSize: getFontSize(12),
     color: '#64748B',
   },
 
@@ -161,7 +166,7 @@ export const styles = StyleSheet.create({
   comments: {
     marginLeft: 6,
     color: '#1E293B',
-    fontSize: RFValue(11),
+    fontSize: getFontSize(12),
   },
 
   responseItem: { paddingVertical: 18 },
@@ -169,7 +174,7 @@ export const styles = StyleSheet.create({
   question: {
     color: '#1E293B',
     marginBottom: 12,
-    fontSize: RFValue(11),
+    fontSize: getFontSize(13),
   },
   responseDetails: { flexDirection: 'row', alignItems: 'center' },
   ratingSection: {
@@ -182,8 +187,8 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     marginRight: 6,
   },
-  ratingText: { fontWeight: '700', fontSize: RFValue(11) },
-  ratingDescription: { color: '#475569', fontSize: RFValue(10) },
+  ratingText: { fontWeight: '700', fontSize: getFontSize(13) },
+  ratingDescription: { color: '#475569', fontSize: getFontSize(13) },
 
   bottomSpacing: { height: 30 },
 });
