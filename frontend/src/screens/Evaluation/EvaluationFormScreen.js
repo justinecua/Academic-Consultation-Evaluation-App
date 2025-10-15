@@ -7,6 +7,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   ActivityIndicator,
+  RefreshControl,
 } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import * as Burnt from 'burnt';
@@ -18,6 +19,7 @@ import CommentsBox from '../../components/evaluation/CommentsBox';
 import LegendBox from '../../components/evaluation/LegendBox';
 import { submitEvaluation, getQuestions } from '../../api/services/evaluation';
 import { AuthContext } from '../../context/AuthContext';
+import CollegeDropdown from '../../components/consultation/CollegeDropDown';
 
 const EvaluationFormScreen = ({ navigation }) => {
   const { accessToken } = useContext(AuthContext);
@@ -31,6 +33,19 @@ const EvaluationFormScreen = ({ navigation }) => {
   const [showObsTime, setShowObsTime] = useState(false);
   const [showConfDate, setShowConfDate] = useState(false);
   const [showConfTime, setShowConfTime] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+  const [showCollegeDropdown, setShowCollegeDropdown] = useState(false);
+
+  const colleges = [
+    'College of Engineering',
+    'College of Arts & Sciences',
+    'College of Education',
+    'College of Computer Studies',
+    'College of Nursing',
+    'College of Criminology',
+    'College of Hospitality and Tourism Management',
+    'College of Business Administration and Accountancy',
+  ];
 
   const [formData, setFormData] = useState({
     teacherName: '',
@@ -45,24 +60,30 @@ const EvaluationFormScreen = ({ navigation }) => {
     timeOfConference: '',
   });
 
-  useEffect(() => {
-    const fetchQuestions = async () => {
-      try {
-        const data = await getQuestions(accessToken);
-        const formatted = data.map(q => ({
-          id: q.id,
-          question: q.text,
-          category: q.category,
-        }));
-        setQuestions(formatted);
-      } catch (err) {
-        console.error('Failed to fetch questions:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchQuestions();
-  }, []);
+  const fetchQuestions = async () => {
+    try {
+      const data = await getQuestions(accessToken);
+      const formatted = data.map(q => ({
+        id: q.id,
+        question: q.text,
+        category: q.category,
+      }));
+      setQuestions(formatted);
+    } catch (err) {
+      Burnt.toast({
+        title: 'Failed to refresh questions',
+        preset: 'error',
+      });
+    } finally {
+      setLoading(false);
+      setRefreshing(false);
+    }
+  };
+
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await fetchQuestions();
+  };
 
   const handleDateChange = (field, event, selectedDate) => {
     const currentDate = selectedDate || new Date();
@@ -97,6 +118,27 @@ const EvaluationFormScreen = ({ navigation }) => {
   };
 
   const handleSubmit = async () => {
+    if (
+      !formData.teacherName.trim() ||
+      !formData.college.trim() ||
+      !formData.subject.trim() ||
+      !formData.roomNumber.trim()
+    ) {
+      Burnt.toast({
+        title: 'Please fill out all required fields',
+        preset: 'error',
+      });
+      return;
+    }
+
+    if (Object.keys(formData.ratings).length === 0) {
+      Burnt.toast({
+        title: 'Please provide at least one rating',
+        preset: 'error',
+      });
+      return;
+    }
+
     setSubmitting(true);
 
     const payload = {
@@ -127,8 +169,7 @@ const EvaluationFormScreen = ({ navigation }) => {
         preset: 'done',
       });
 
-      console.log('Submitted:', res);
-
+      // reset
       const today = new Date();
       setFormData({
         teacherName: '',
@@ -142,6 +183,7 @@ const EvaluationFormScreen = ({ navigation }) => {
         dateOfConference: '',
         timeOfConference: '',
       });
+      navigation.goBack();
     } catch (err) {
       console.error('Error submitting:', err);
       Burnt.toast({
@@ -152,6 +194,10 @@ const EvaluationFormScreen = ({ navigation }) => {
       setSubmitting(false);
     }
   };
+
+  useEffect(() => {
+    fetchQuestions();
+  }, []);
 
   if (loading) {
     return (
@@ -174,8 +220,13 @@ const EvaluationFormScreen = ({ navigation }) => {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.container}
     >
-      <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <View style={styles.section}>
+      <ScrollView
+        contentContainerStyle={styles.scrollContainer}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
+        <View style={styles.MainSection}>
           <Text style={styles.mainTitle}>
             Evaluation for Classroom Instruction Form
           </Text>
@@ -230,11 +281,14 @@ const EvaluationFormScreen = ({ navigation }) => {
             </View>
           </View>
 
-          <FormField
-            label="College"
-            value={formData.college}
-            onChangeText={text => setFormData({ ...formData, college: text })}
+          <CollegeDropdown
+            college={formData.college}
+            setCollege={val => setFormData({ ...formData, college: val })}
+            show={showCollegeDropdown}
+            setShow={setShowCollegeDropdown}
+            colleges={colleges}
           />
+
           <FormField
             label="Room Number"
             value={formData.roomNumber}

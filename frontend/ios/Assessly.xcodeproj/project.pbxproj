@@ -7,10 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0C80B921A6F3F58F76C31292 /* libPods-Clevu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-Clevu.a */; };
+		0C80B921A6F3F58F76C31292 /* libPods-Assessly.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-Assessly.a */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		0223D9EEAEB54DFCA6AF1A68 /* Pacifico.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D374F9B618294D09B8CC16B6 /* Pacifico.ttf */; };
+		F9068B1032BC47CBA10ED41B /* BillionDreams_PERSONAL.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D4D53A87E444AEEADAEBD93 /* BillionDreams_PERSONAL.ttf */; };
+		4BA06467315044349A12BBC9 /* Nunito-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF3E4CC7D2A24006BA93C344 /* Nunito-VariableFont_wght.ttf */; };
+		5AF0935617484954B9AB1791 /* Nunito-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6B099BA0AEB14BF3B472752D /* Nunito-Black.ttf */; };
+		7D6FF9174F184F3EA24E7616 /* Nunito-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6A09939B38814804A7E68DCD /* Nunito-BlackItalic.ttf */; };
+		C55342811E2142E18BC4AC4A /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A8D97961500740758AC638C9 /* Nunito-Bold.ttf */; };
+		8850FCDE9FB946B5B0F00AC5 /* Nunito-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B6D072CA7B024B2CAA2F9CC6 /* Nunito-BoldItalic.ttf */; };
+		556C4872CFBE4756BEF1EB25 /* Nunito-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 26BB9765A7F04CE89551B058 /* Nunito-ExtraBold.ttf */; };
+		4A85AC54B9A04BCF92BB6EB1 /* Nunito-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D777E565BD6442A9E8ECE93 /* Nunito-ExtraBoldItalic.ttf */; };
+		F38962620E064727A488E8C1 /* Nunito-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 639589086A6142A48C1612D2 /* Nunito-ExtraLight.ttf */; };
+		FAB12F9FE74A454EA2F9D4FD /* Nunito-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C9788916D05F4B209EB38366 /* Nunito-ExtraLightItalic.ttf */; };
+		0CC86A145A0646578592259F /* Nunito-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 03E1A96355814DFCB77825BE /* Nunito-Italic.ttf */; };
+		9673FEDB36AE4747B4ECCCEE /* Nunito-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4259C065A414A6EA309A98E /* Nunito-Light.ttf */; };
+		2912BC3DA5C24A5CB83BEE4F /* Nunito-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0C1769089F594A7A843F5EC0 /* Nunito-LightItalic.ttf */; };
+		78C44A5DE21540AFA39F5B57 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3F41741B35534E7F9ACCF81A /* Nunito-Regular.ttf */; };
+		6F588867D9B54C19BAAABB75 /* Nunito-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7E2EFE6826FF441DADE51DCA /* Nunito-SemiBold.ttf */; };
+		138F08A0A58349F89F7ED2EF /* Nunito-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 613751BCD16F4822BFB1B493 /* Nunito-SemiBoldItalic.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -19,22 +36,39 @@
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
-			remoteInfo = Clevu;
+			remoteInfo = "Assessly";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* Clevu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Clevu.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Clevu/Images.xcassets; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Clevu/Info.plist; sourceTree = "<group>"; };
-		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = Clevu/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		3B4392A12AC88292D35C810B /* Pods-Clevu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Clevu.debug.xcconfig"; path = "Target Support Files/Pods-Clevu/Pods-Clevu.debug.xcconfig"; sourceTree = "<group>"; };
-		5709B34CF0A7D63546082F79 /* Pods-Clevu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Clevu.release.xcconfig"; path = "Target Support Files/Pods-Clevu/Pods-Clevu.release.xcconfig"; sourceTree = "<group>"; };
-		5DCACB8F33CDC322A6C60F78 /* libPods-Clevu.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Clevu.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Clevu/AppDelegate.swift; sourceTree = "<group>"; };
-		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Clevu/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* Assessly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Assessly.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "Assessly/Images.xcassets"; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Assessly/Info.plist"; sourceTree = "<group>"; };
+		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = Assessly/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		3B4392A12AC88292D35C810B /* Pods-Assessly.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Assessly.debug.xcconfig"; path = "Target Support Files/Pods-Assessly/Pods-Assessly.debug.xcconfig"; sourceTree = "<group>"; };
+		5709B34CF0A7D63546082F79 /* Pods-Assessly.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Assessly.release.xcconfig"; path = "Target Support Files/Pods-Assessly/Pods-Assessly.release.xcconfig"; sourceTree = "<group>"; };
+		5DCACB8F33CDC322A6C60F78 /* libPods-Assessly.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Assessly.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Assessly/AppDelegate.swift; sourceTree = "<group>"; };
+		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = "Assessly/LaunchScreen.storyboard"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		D374F9B618294D09B8CC16B6 /* Pacifico.ttf */ = {isa = PBXFileReference; name = "Pacifico.ttf"; path = "../src/assets/fonts/Pacifico.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		2D4D53A87E444AEEADAEBD93 /* BillionDreams_PERSONAL.ttf */ = {isa = PBXFileReference; name = "BillionDreams_PERSONAL.ttf"; path = "../src/assets/fonts/BillionDreams_PERSONAL.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		FF3E4CC7D2A24006BA93C344 /* Nunito-VariableFont_wght.ttf */ = {isa = PBXFileReference; name = "Nunito-VariableFont_wght.ttf"; path = "../src/assets/fonts/Nunito-VariableFont_wght.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6B099BA0AEB14BF3B472752D /* Nunito-Black.ttf */ = {isa = PBXFileReference; name = "Nunito-Black.ttf"; path = "../src/assets/fonts/Nunito-Black.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6A09939B38814804A7E68DCD /* Nunito-BlackItalic.ttf */ = {isa = PBXFileReference; name = "Nunito-BlackItalic.ttf"; path = "../src/assets/fonts/Nunito-BlackItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A8D97961500740758AC638C9 /* Nunito-Bold.ttf */ = {isa = PBXFileReference; name = "Nunito-Bold.ttf"; path = "../src/assets/fonts/Nunito-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		B6D072CA7B024B2CAA2F9CC6 /* Nunito-BoldItalic.ttf */ = {isa = PBXFileReference; name = "Nunito-BoldItalic.ttf"; path = "../src/assets/fonts/Nunito-BoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		26BB9765A7F04CE89551B058 /* Nunito-ExtraBold.ttf */ = {isa = PBXFileReference; name = "Nunito-ExtraBold.ttf"; path = "../src/assets/fonts/Nunito-ExtraBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		4D777E565BD6442A9E8ECE93 /* Nunito-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; name = "Nunito-ExtraBoldItalic.ttf"; path = "../src/assets/fonts/Nunito-ExtraBoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		639589086A6142A48C1612D2 /* Nunito-ExtraLight.ttf */ = {isa = PBXFileReference; name = "Nunito-ExtraLight.ttf"; path = "../src/assets/fonts/Nunito-ExtraLight.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C9788916D05F4B209EB38366 /* Nunito-ExtraLightItalic.ttf */ = {isa = PBXFileReference; name = "Nunito-ExtraLightItalic.ttf"; path = "../src/assets/fonts/Nunito-ExtraLightItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		03E1A96355814DFCB77825BE /* Nunito-Italic.ttf */ = {isa = PBXFileReference; name = "Nunito-Italic.ttf"; path = "../src/assets/fonts/Nunito-Italic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A4259C065A414A6EA309A98E /* Nunito-Light.ttf */ = {isa = PBXFileReference; name = "Nunito-Light.ttf"; path = "../src/assets/fonts/Nunito-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		0C1769089F594A7A843F5EC0 /* Nunito-LightItalic.ttf */ = {isa = PBXFileReference; name = "Nunito-LightItalic.ttf"; path = "../src/assets/fonts/Nunito-LightItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		3F41741B35534E7F9ACCF81A /* Nunito-Regular.ttf */ = {isa = PBXFileReference; name = "Nunito-Regular.ttf"; path = "../src/assets/fonts/Nunito-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		7E2EFE6826FF441DADE51DCA /* Nunito-SemiBold.ttf */ = {isa = PBXFileReference; name = "Nunito-SemiBold.ttf"; path = "../src/assets/fonts/Nunito-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		613751BCD16F4822BFB1B493 /* Nunito-SemiBoldItalic.ttf */ = {isa = PBXFileReference; name = "Nunito-SemiBoldItalic.ttf"; path = "../src/assets/fonts/Nunito-SemiBoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,7 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C80B921A6F3F58F76C31292 /* libPods-Clevu.a in Frameworks */,
+				0C80B921A6F3F58F76C31292 /* libPods-Assessly.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,7 +91,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		13B07FAE1A68108700A75B9A /* Clevu */ = {
+		13B07FAE1A68108700A75B9A /* Assessly */ = {
 			isa = PBXGroup;
 			children = (
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -66,14 +100,14 @@
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */,
 			);
-			name = Clevu;
+			name = "Assessly";
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				5DCACB8F33CDC322A6C60F78 /* libPods-Clevu.a */,
+				5DCACB8F33CDC322A6C60F78 /* libPods-Assessly.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -88,11 +122,12 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				13B07FAE1A68108700A75B9A /* Clevu */,
+				13B07FAE1A68108700A75B9A /* Assessly */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				6F7CFE0F8C2A405294D46C1C /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -102,7 +137,7 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* Clevu.app */,
+				13B07F961A680F5B00A75B9A /* Assessly.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -110,18 +145,43 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3B4392A12AC88292D35C810B /* Pods-Clevu.debug.xcconfig */,
-				5709B34CF0A7D63546082F79 /* Pods-Clevu.release.xcconfig */,
+				3B4392A12AC88292D35C810B /* Pods-Assessly.debug.xcconfig */,
+				5709B34CF0A7D63546082F79 /* Pods-Assessly.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		6F7CFE0F8C2A405294D46C1C /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				D374F9B618294D09B8CC16B6 /* Pacifico.ttf */,
+				2D4D53A87E444AEEADAEBD93 /* BillionDreams_PERSONAL.ttf */,
+				FF3E4CC7D2A24006BA93C344 /* Nunito-VariableFont_wght.ttf */,
+				6B099BA0AEB14BF3B472752D /* Nunito-Black.ttf */,
+				6A09939B38814804A7E68DCD /* Nunito-BlackItalic.ttf */,
+				A8D97961500740758AC638C9 /* Nunito-Bold.ttf */,
+				B6D072CA7B024B2CAA2F9CC6 /* Nunito-BoldItalic.ttf */,
+				26BB9765A7F04CE89551B058 /* Nunito-ExtraBold.ttf */,
+				4D777E565BD6442A9E8ECE93 /* Nunito-ExtraBoldItalic.ttf */,
+				639589086A6142A48C1612D2 /* Nunito-ExtraLight.ttf */,
+				C9788916D05F4B209EB38366 /* Nunito-ExtraLightItalic.ttf */,
+				03E1A96355814DFCB77825BE /* Nunito-Italic.ttf */,
+				A4259C065A414A6EA309A98E /* Nunito-Light.ttf */,
+				0C1769089F594A7A843F5EC0 /* Nunito-LightItalic.ttf */,
+				3F41741B35534E7F9ACCF81A /* Nunito-Regular.ttf */,
+				7E2EFE6826FF441DADE51DCA /* Nunito-SemiBold.ttf */,
+				613751BCD16F4822BFB1B493 /* Nunito-SemiBoldItalic.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		13B07F861A680F5B00A75B9A /* Clevu */ = {
+		13B07F861A680F5B00A75B9A /* Assessly */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Clevu" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Assessly" */;
 			buildPhases = (
 				C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
@@ -135,9 +195,9 @@
 			);
 			dependencies = (
 			);
-			name = Clevu;
-			productName = Clevu;
-			productReference = 13B07F961A680F5B00A75B9A /* Clevu.app */;
+			name = "Assessly";
+			productName = "Assessly";
+			productReference = 13B07F961A680F5B00A75B9A /* Assessly.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -153,7 +213,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Clevu" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Assessly" */;
 			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -166,7 +226,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* Clevu */,
+				13B07F861A680F5B00A75B9A /* Assessly */,
 			);
 		};
 /* End PBXProject section */
@@ -185,6 +245,23 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				0223D9EEAEB54DFCA6AF1A68 /* Pacifico.ttf in Resources */,
+				F9068B1032BC47CBA10ED41B /* BillionDreams_PERSONAL.ttf in Resources */,
+				4BA06467315044349A12BBC9 /* Nunito-VariableFont_wght.ttf in Resources */,
+				5AF0935617484954B9AB1791 /* Nunito-Black.ttf in Resources */,
+				7D6FF9174F184F3EA24E7616 /* Nunito-BlackItalic.ttf in Resources */,
+				C55342811E2142E18BC4AC4A /* Nunito-Bold.ttf in Resources */,
+				8850FCDE9FB946B5B0F00AC5 /* Nunito-BoldItalic.ttf in Resources */,
+				556C4872CFBE4756BEF1EB25 /* Nunito-ExtraBold.ttf in Resources */,
+				4A85AC54B9A04BCF92BB6EB1 /* Nunito-ExtraBoldItalic.ttf in Resources */,
+				F38962620E064727A488E8C1 /* Nunito-ExtraLight.ttf in Resources */,
+				FAB12F9FE74A454EA2F9D4FD /* Nunito-ExtraLightItalic.ttf in Resources */,
+				0CC86A145A0646578592259F /* Nunito-Italic.ttf in Resources */,
+				9673FEDB36AE4747B4ECCCEE /* Nunito-Light.ttf in Resources */,
+				2912BC3DA5C24A5CB83BEE4F /* Nunito-LightItalic.ttf in Resources */,
+				78C44A5DE21540AFA39F5B57 /* Nunito-Regular.ttf in Resources */,
+				6F588867D9B54C19BAAABB75 /* Nunito-SemiBold.ttf in Resources */,
+				138F08A0A58349F89F7ED2EF /* Nunito-SemiBoldItalic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,15 +290,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Clevu/Pods-Clevu-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Assessly/Pods-Assessly-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Clevu/Pods-Clevu-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Assessly/Pods-Assessly-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Clevu/Pods-Clevu-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Assessly/Pods-Assessly-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */ = {
@@ -239,7 +316,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Clevu-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Assessly-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -252,15 +329,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Clevu/Pods-Clevu-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Assessly/Pods-Assessly-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Clevu/Pods-Clevu-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Assessly/Pods-Assessly-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Clevu/Pods-Clevu-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Assessly/Pods-Assessly-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -279,7 +356,7 @@
 /* Begin PBXTargetDependency section */
 		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 13B07F861A680F5B00A75B9A /* Clevu */;
+			target = 13B07F861A680F5B00A75B9A /* Assessly */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -287,13 +364,14 @@
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-Clevu.debug.xcconfig */;
+			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-Assessly.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = Clevu/Info.plist;
+				INFOPLIST_FILE = "Assessly/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Assessly";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -306,7 +384,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = Clevu;
+				PRODUCT_NAME = "Assessly";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -315,12 +393,13 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-Clevu.release.xcconfig */;
+			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-Assessly.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				INFOPLIST_FILE = Clevu/Info.plist;
+				INFOPLIST_FILE = "Assessly/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Assessly";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -333,7 +412,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = Clevu;
+				PRODUCT_NAME = "Assessly";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -481,7 +560,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Clevu" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Assessly" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
@@ -490,7 +569,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Clevu" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Assessly" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
