@@ -1,4 +1,4 @@
-package com.clevu
+package com.assessly
 
 import android.app.Application
 import com.facebook.react.PackageList

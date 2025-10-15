@@ -6,8 +6,8 @@ import {
   ScrollView,
   ActivityIndicator,
   RefreshControl,
+  TouchableOpacity,
 } from 'react-native';
-import { getEvaluationDetail } from '../../api/services/evaluation';
 import { AuthContext } from '../../context/AuthContext';
 import {
   User,
@@ -15,12 +15,18 @@ import {
   Building,
   MapPin,
   Calendar,
-  Clock,
   MessageSquare,
-  Star,
-  Award,
-  FileText,
+  Download,
 } from 'lucide-react-native';
+import { styles } from '../../styles/evaluationDetailScreen';
+import {
+  getEvaluationDetail,
+  downloadEvaluationPDF,
+} from '../../api/services/evaluation';
+import RNFS from 'react-native-fs';
+import RNPrint from 'react-native-print';
+import * as Burnt from 'burnt';
+import { Buffer } from 'buffer';
 
 const EvaluationDetailScreen = ({ route }) => {
   const { id } = route.params;
@@ -29,15 +35,34 @@ const EvaluationDetailScreen = ({ route }) => {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
 
+  const handleDownloadPDF = async () => {
+    try {
+      global.Buffer = global.Buffer || Buffer;
+
+      const arrayBuffer = await downloadEvaluationPDF(accessToken, id);
+      const base64Data = Buffer.from(arrayBuffer, 'binary').toString('base64');
+      const localFile = `${RNFS.DocumentDirectoryPath}/evaluation_${id}.pdf`;
+
+      await RNFS.writeFile(localFile, base64Data, 'base64');
+      await RNPrint.print({ filePath: localFile });
+    } catch (error) {
+      console.error('Download Evaluation PDF error:', error);
+      Burnt.toast({
+        title: 'Failed to open PDF file',
+        preset: 'error',
+      });
+    }
+  };
+
   const fetchDetail = async (isRefresh = false) => {
     if (!isRefresh) setLoading(true);
     else setRefreshing(true);
 
     try {
       const res = await getEvaluationDetail(accessToken, id);
+      console.log(res);
       setEvaluation(res);
     } catch (error) {
-      console.error('Failed to fetch evaluation details:', error);
     } finally {
       setLoading(false);
       setRefreshing(false);
@@ -70,9 +95,9 @@ const EvaluationDetailScreen = ({ route }) => {
   };
 
   const getRatingColor = rating => {
-    if (rating >= 4) return '#38A169'; // Green
-    if (rating >= 3) return '#D69E2E'; // Yellow
-    return '#E53E3E'; // Red
+    if (rating >= 4) return '#38A169';
+    if (rating >= 3) return '#D69E2E';
+    return '#E53E3E';
   };
 
   const getOverallRatingColor = rating => {
@@ -122,35 +147,16 @@ const EvaluationDetailScreen = ({ route }) => {
       }
       showsVerticalScrollIndicator={false}
     >
-      {/* Header Section */}
+      {/* Header with Actions */}
       <View style={styles.header}>
-        <View style={styles.headerContent}>
-          <Text style={styles.title}>Evaluation Details</Text>
-          <Text style={styles.subtitle}>Observation #{evaluation.id}</Text>
-        </View>
-        <View
-          style={[
-            styles.ratingBadge,
-            {
-              backgroundColor: `${getOverallRatingColor(
-                evaluation.average_rating,
-              )}15`,
-            },
-          ]}
-        >
-          <Star
-            size={16}
-            color={getOverallRatingColor(evaluation.average_rating)}
-            fill={getOverallRatingColor(evaluation.average_rating)}
-          />
-          <Text
-            style={[
-              styles.ratingBadgeText,
-              { color: getOverallRatingColor(evaluation.average_rating) },
-            ]}
+        <Text style={styles.headerTitle}>{evaluation.teacher_name}</Text>
+        <View style={styles.actionButtons}>
+          <TouchableOpacity
+            onPress={handleDownloadPDF}
+            style={styles.iconButton}
           >
-            {evaluation.average_rating?.toFixed(1) || 'N/A'}
-          </Text>
+            <Download size={20} color="#6B7280" />
+          </TouchableOpacity>
         </View>
       </View>
 
@@ -256,11 +262,11 @@ const EvaluationDetailScreen = ({ route }) => {
               {evaluation.average_rating?.toFixed(1) || 'N/A'}
             </Text>
           </View>
-          <Text style={styles.ratingLabel}>
+          {/* <Text style={styles.ratingLabel}>
             {getRatingLabel(evaluation.average_rating)}
-          </Text>
+          </Text> */}
           <Text style={styles.ratingSubtext}>
-            Based on {evaluation.responses?.length || 0} criteria
+            Based on {evaluation.responses_detail?.length || 0} responses
           </Text>
         </View>
       </View>
@@ -278,21 +284,17 @@ const EvaluationDetailScreen = ({ route }) => {
 
       {/* Responses Section */}
       <View style={styles.card}>
-        <Text style={styles.cardTitle}>
-          Detailed Responses ({evaluation.responses?.length || 0})
-        </Text>
-        {evaluation.responses?.map((resp, index) => (
+        <Text style={styles.cardTitle}>Detailed Responses</Text>
+        {evaluation.responses_detail?.map((resp, index) => (
           <View
             key={resp.id}
             style={[
               styles.responseItem,
-              index < evaluation.responses.length - 1 && styles.responseBorder,
+              index < evaluation.responses?.length - 1 && styles.responseBorder,
             ]}
           >
             {/* Question */}
-            <Text style={styles.question}>
-              {resp.question?.text || 'Question not available'}
-            </Text>
+            <Text style={styles.question}>{resp.question?.text}</Text>
 
             {/* Rating and Remarks Container */}
             <View style={styles.responseDetails}>
@@ -329,288 +331,3 @@ const EvaluationDetailScreen = ({ route }) => {
 };
 
 export default EvaluationDetailScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F8FAFC',
-  },
-  loadingContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#FFFFFF',
-  },
-  loadingText: {
-    marginTop: 16,
-    fontSize: 16,
-    color: '#718096',
-    fontWeight: '500',
-  },
-  errorContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#FFFFFF',
-    padding: 24,
-  },
-  errorText: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: '#2D3748',
-    marginBottom: 8,
-    textAlign: 'center',
-  },
-  errorSubtext: {
-    fontSize: 16,
-    color: '#718096',
-    textAlign: 'center',
-  },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    justifyContent: 'space-between',
-    padding: 24,
-    paddingBottom: 20,
-    backgroundColor: '#fff',
-    borderBottomWidth: 1,
-    borderBottomColor: '#E2E8F0',
-  },
-  headerContent: {
-    flex: 1,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: '700',
-    color: '#1A202C',
-    marginBottom: 4,
-  },
-  subtitle: {
-    fontSize: 16,
-    color: '#718096',
-    fontWeight: '500',
-  },
-  ratingBadge: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    borderRadius: 20,
-    marginLeft: 12,
-  },
-  ratingBadgeText: {
-    fontSize: 14,
-    fontWeight: '600',
-    marginLeft: 4,
-  },
-  card: {
-    backgroundColor: '#fff',
-    margin: 16,
-    marginBottom: 0,
-    padding: 20,
-    borderRadius: 12,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.05,
-    shadowRadius: 3,
-    elevation: 2,
-  },
-  cardTitle: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: '#2D3748',
-    marginBottom: 16,
-  },
-  infoSection: {
-    gap: 16,
-  },
-  infoRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    gap: 16,
-  },
-  infoItem: {
-    flex: 1,
-  },
-  infoLabelContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 6,
-  },
-  infoLabel: {
-    fontSize: 12,
-    color: '#718096',
-    fontWeight: '500',
-    marginLeft: 6,
-    textTransform: 'uppercase',
-    letterSpacing: 0.5,
-  },
-  infoValue: {
-    fontSize: 16,
-    color: '#2D3748',
-    fontWeight: '500',
-  },
-  scheduleSection: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  scheduleItem: {
-    flex: 1,
-    alignItems: 'center',
-  },
-  scheduleHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 8,
-  },
-  scheduleTitle: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#2D3748',
-    marginLeft: 6,
-  },
-  scheduleDate: {
-    fontSize: 16,
-    fontWeight: '500',
-    color: '#2D3748',
-    marginBottom: 2,
-  },
-  scheduleTime: {
-    fontSize: 14,
-    color: '#718096',
-  },
-  scheduleDivider: {
-    width: 1,
-    height: 40,
-    backgroundColor: '#E2E8F0',
-    marginHorizontal: 20,
-  },
-  ratingContainer: {
-    alignItems: 'center',
-    paddingVertical: 8,
-  },
-  ratingCircle: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 12,
-  },
-  ratingNumber: {
-    fontSize: 28,
-    fontWeight: '700',
-    color: '#fff',
-  },
-  ratingLabel: {
-    fontSize: 18,
-    color: '#2D3748',
-    fontWeight: '600',
-    marginBottom: 4,
-  },
-  ratingSubtext: {
-    fontSize: 14,
-    color: '#718096',
-  },
-  commentsContainer: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-  },
-  comments: {
-    flex: 1,
-    fontSize: 16,
-    color: '#4A5568',
-    lineHeight: 22,
-    marginLeft: 12,
-    fontStyle: 'italic',
-  },
-  responseItem: {
-    paddingVertical: 16,
-  },
-  responseBorder: {
-    borderBottomWidth: 1,
-    borderBottomColor: '#EDF2F7',
-  },
-  question: {
-    fontSize: 16,
-    color: '#2D3748',
-    marginBottom: 16,
-    lineHeight: 22,
-    fontWeight: '500',
-  },
-  responseDetails: {
-    flexDirection: 'row',
-    gap: 16,
-  },
-  ratingSection: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    gap: 10,
-  },
-
-  remarksSection: {
-    flex: 2,
-    alignItems: 'flex-start',
-  },
-  ratingHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 8,
-  },
-  sectionLabel: {
-    fontSize: 12,
-    color: '#718096',
-    fontWeight: '600',
-    marginLeft: 6,
-    textTransform: 'uppercase',
-    letterSpacing: 0.5,
-  },
-  ratingPill: {
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    borderRadius: 12,
-  },
-  ratingText: {
-    fontSize: 16,
-    fontWeight: '700',
-    textAlign: 'center',
-  },
-  ratingDescription: {
-    fontSize: 14,
-    color: '#718096',
-    fontStyle: 'italic',
-  },
-  remarksContainer: {
-    backgroundColor: '#F7FAFC',
-    padding: 12,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: '#E2E8F0',
-    width: '100%',
-  },
-  remarks: {
-    fontSize: 14,
-    color: '#4A5568',
-    lineHeight: 20,
-  },
-  noRemarksContainer: {
-    backgroundColor: '#F7FAFC',
-    padding: 12,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: '#E2E8F0',
-    borderStyle: 'dashed',
-    width: '100%',
-  },
-  noRemarks: {
-    fontSize: 14,
-    color: '#CBD5E0',
-    fontStyle: 'italic',
-    textAlign: 'center',
-  },
-  bottomSpacing: {
-    height: 20,
-  },
-});
