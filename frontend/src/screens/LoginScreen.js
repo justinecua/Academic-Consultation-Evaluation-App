@@ -11,14 +11,15 @@ import {
 import { Eye, EyeOff, User, Lock } from 'lucide-react-native';
 import { AuthContext } from '../context/AuthContext';
 import { styles } from '../styles/loginStyle';
-import * as Burnt from 'burnt';
-import { moderateScale, scale, verticalScale } from 'react-native-size-matters';
+import { moderateScale } from 'react-native-size-matters';
+import { showMessage } from 'react-native-flash-message';
 
 const LoginScreen = ({ navigation }) => {
   const [credentials, setCredentials] = useState({
     username: '',
     password: '',
   });
+
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [focusedField, setFocusedField] = useState(null);
@@ -29,14 +30,11 @@ const LoginScreen = ({ navigation }) => {
     setCredentials(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleFocus = field => setFocusedField(field);
-  const handleBlur = () => setFocusedField(null);
-
   const validateForm = () => {
     if (!credentials.username.trim() || !credentials.password.trim()) {
-      Burnt.toast({
-        title: 'Please enter both username and password',
-        preset: 'error',
+      showMessage({
+        message: "Please enter both username and password",
+        type: "danger",
       });
       return false;
     }
@@ -48,16 +46,30 @@ const LoginScreen = ({ navigation }) => {
 
     try {
       setLoading(true);
+
       const result = await login(credentials.username, credentials.password);
 
-      Burnt.toast({
-        title: result.message,
-        preset: result.success ? 'done' : 'error',
-      });
+      console.log("LOGIN RESULT →", result);
+
+      if (!result) {
+        showMessage({ message: "No response from server.", type: "danger" });
+        return;
+      }
+
+      if (!result.success) {
+        showMessage({ message: result.message || "Login failed", type: "danger" });
+        return;
+      }
+
+      // SUCCESS 🎉
+      showMessage({ message: "Login successful!", type: "success" });
+      navigation.replace("Home"); // adjust to your real screen name
+
     } catch (error) {
-      Burnt.toast({
-        title: 'Authentication failed. Please try again.',
-        preset: 'error',
+      console.log("LOGIN ERROR →", error);
+      showMessage({
+        message: "Something went wrong. Please try again.",
+        type: "danger",
       });
     } finally {
       setLoading(false);
@@ -66,6 +78,7 @@ const LoginScreen = ({ navigation }) => {
 
   const isFormValid =
     credentials.username.trim() && credentials.password.trim();
+
   const isButtonDisabled = loading || !isFormValid;
 
   return (
@@ -75,7 +88,8 @@ const LoginScreen = ({ navigation }) => {
       showsVerticalScrollIndicator={false}
     >
       <View style={styles.content}>
-        {/* Header */}
+        
+        {/* HEADER */}
         <View style={styles.headerSection}>
           <View style={styles.logoContainer}>
             <Image
@@ -84,6 +98,7 @@ const LoginScreen = ({ navigation }) => {
               resizeMode="contain"
             />
           </View>
+
           <View style={styles.textContainer}>
             <Text style={styles.title}>Assessly</Text>
             <Text style={styles.subtitle}>
@@ -92,9 +107,8 @@ const LoginScreen = ({ navigation }) => {
           </View>
         </View>
 
-        {/* Form */}
+        {/* USERNAME */}
         <View style={styles.formSection}>
-          {/* Username */}
           <View style={styles.inputContainer}>
             <View
               style={[
@@ -106,19 +120,20 @@ const LoginScreen = ({ navigation }) => {
                 size={moderateScale(20)}
                 color={focusedField === 'username' ? '#1E3A8A' : '#6B7280'}
               />
+
               <TextInput
                 style={styles.input}
                 value={credentials.username}
                 onChangeText={value => handleInputChange('username', value)}
-                onFocus={() => handleFocus('username')}
-                onBlur={handleBlur}
+                onFocus={() => setFocusedField('username')}
+                onBlur={() => setFocusedField(null)}
                 placeholder="Enter your username"
                 placeholderTextColor="#9CA3AF"
               />
             </View>
           </View>
 
-          {/* Password */}
+          {/* PASSWORD */}
           <View style={styles.inputContainer}>
             <View
               style={[
@@ -130,19 +145,20 @@ const LoginScreen = ({ navigation }) => {
                 size={moderateScale(20)}
                 color={focusedField === 'password' ? '#1E3A8A' : '#6B7280'}
               />
+
               <TextInput
                 style={styles.input}
                 value={credentials.password}
                 onChangeText={value => handleInputChange('password', value)}
-                onFocus={() => handleFocus('password')}
-                onBlur={handleBlur}
+                onFocus={() => setFocusedField('password')}
+                onBlur={() => setFocusedField(null)}
                 secureTextEntry={!showPassword}
                 placeholder="Enter your password"
                 placeholderTextColor="#9CA3AF"
               />
+
               <TouchableOpacity
                 onPress={() => setShowPassword(!showPassword)}
-                style={styles.visibilityToggle}
                 disabled={loading}
               >
                 {showPassword ? (
@@ -154,14 +170,14 @@ const LoginScreen = ({ navigation }) => {
             </View>
           </View>
 
-          {/* Login Button */}
+          {/* LOGIN BUTTON */}
           <TouchableOpacity
             style={[styles.button, isButtonDisabled && styles.buttonDisabled]}
             onPress={handleLogin}
             disabled={isButtonDisabled}
           >
             {loading ? (
-              <ActivityIndicator color="#FFFFFF" size="small" />
+              <ActivityIndicator size="small" color="#FFF" />
             ) : (
               <Text style={styles.buttonText}>Login</Text>
             )}
@@ -169,7 +185,7 @@ const LoginScreen = ({ navigation }) => {
         </View>
       </View>
 
-      {/* Footer */}
+      {/* FOOTER */}
       <View style={styles.footer}>
         <Text style={styles.footerText}>
           © 2025 St. Michael’s College of Iligan Inc. All rights reserved.

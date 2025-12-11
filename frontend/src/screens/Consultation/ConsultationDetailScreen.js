@@ -6,6 +6,7 @@ import {
   ActivityIndicator,
   RefreshControl,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import { AuthContext } from '../../context/AuthContext';
 import { Download, Calendar, Clock, MapPin } from 'lucide-react-native';
@@ -17,17 +18,17 @@ import RNFS from 'react-native-fs';
 import RNPrint from 'react-native-print';
 import { styles } from '../../styles/consultationDetailScreenStyle';
 import { Buffer } from 'buffer';
-import * as Burnt from 'burnt';
 import FileViewer from 'react-native-file-viewer';
 
 const ConsultationDetailScreen = ({ route, navigation }) => {
   const { id } = route.params;
   const { accessToken } = useContext(AuthContext);
+
   const [consultation, setConsultation] = useState(null);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
 
-  const formatDate = dateString => {
+  const formatDate = (dateString) => {
     if (!dateString) return 'Not specified';
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
@@ -36,7 +37,7 @@ const ConsultationDetailScreen = ({ route, navigation }) => {
     });
   };
 
-  const formatTime = timeString => {
+  const formatTime = (timeString) => {
     if (!timeString) return 'Not specified';
     return new Date(`2000-01-01T${timeString}`).toLocaleTimeString('en-US', {
       hour: '2-digit',
@@ -52,10 +53,10 @@ const ConsultationDetailScreen = ({ route, navigation }) => {
       const res = await getConsultationDetail(accessToken, id);
       setConsultation(res);
     } catch (error) {
-      Burnt.toast({
-        title: 'Failed to load consultation details',
-        preset: 'error',
-      });
+      Alert.alert(
+        'Error',
+        'Failed to load consultation details. Please try again.'
+      );
     } finally {
       setLoading(false);
       setRefreshing(false);
@@ -77,14 +78,10 @@ const ConsultationDetailScreen = ({ route, navigation }) => {
       const localFile = `${RNFS.DocumentDirectoryPath}/consultation_${id}.pdf`;
 
       await RNFS.writeFile(localFile, base64Data, 'base64');
-
       await RNPrint.print({ filePath: localFile });
     } catch (error) {
       console.error('Download PDF error:', error);
-      Burnt.toast({
-        title: 'Failed to open PDF file',
-        preset: 'error',
-      });
+      Alert.alert('Error', 'Failed to open or generate PDF file.');
     }
   };
 
@@ -100,9 +97,7 @@ const ConsultationDetailScreen = ({ route, navigation }) => {
   if (!consultation) {
     return (
       <View style={styles.errorContainer}>
-        <Text style={styles.errorText}>
-          Failed to load consultation details
-        </Text>
+        <Text style={styles.errorText}>Failed to load consultation details</Text>
         <TouchableOpacity style={styles.retryButton} onPress={fetchDetail}>
           <Text style={styles.retryButtonText}>Try Again</Text>
         </TouchableOpacity>
@@ -126,11 +121,9 @@ const ConsultationDetailScreen = ({ route, navigation }) => {
       {/* Header with Actions */}
       <View style={styles.header}>
         <Text style={styles.headerTitle}>{consultation.student_name}</Text>
+
         <View style={styles.actionButtons}>
-          <TouchableOpacity
-            onPress={handleDownloadPDF}
-            style={styles.iconButton}
-          >
+          <TouchableOpacity onPress={handleDownloadPDF} style={styles.iconButton}>
             <Download size={20} color="#6B7280" />
           </TouchableOpacity>
         </View>
@@ -177,7 +170,7 @@ const ConsultationDetailScreen = ({ route, navigation }) => {
         </View>
       </View>
 
-      {/* Academic Details Card */}
+      {/* Academic Details */}
       <View style={styles.card}>
         <View style={styles.cardHeader}>
           <Text style={styles.cardTitle}>Academic Details</Text>
@@ -223,7 +216,7 @@ const ConsultationDetailScreen = ({ route, navigation }) => {
         </View>
       </View>
 
-      {/* Consultation Schedule Card */}
+      {/* Consultation Schedule */}
       <View style={styles.card}>
         <View style={styles.cardHeader}>
           <Text style={styles.cardTitle}>Consultation Schedule</Text>
@@ -236,9 +229,7 @@ const ConsultationDetailScreen = ({ route, navigation }) => {
             </View>
             <View style={styles.scheduleContent}>
               <Text style={styles.scheduleLabel}>Date</Text>
-              <Text style={styles.scheduleValue}>
-                {formatDate(consultation.date)}
-              </Text>
+              <Text style={styles.scheduleValue}>{formatDate(consultation.date)}</Text>
             </View>
           </View>
 
@@ -248,9 +239,7 @@ const ConsultationDetailScreen = ({ route, navigation }) => {
             </View>
             <View style={styles.scheduleContent}>
               <Text style={styles.scheduleLabel}>Time</Text>
-              <Text style={styles.scheduleValue}>
-                {formatTime(consultation.time)}
-              </Text>
+              <Text style={styles.scheduleValue}>{formatTime(consultation.time)}</Text>
             </View>
           </View>
 
@@ -260,9 +249,7 @@ const ConsultationDetailScreen = ({ route, navigation }) => {
             </View>
             <View style={styles.scheduleContent}>
               <Text style={styles.scheduleLabel}>Venue</Text>
-              <Text style={styles.scheduleValue}>
-                {consultation.venue || '—'}
-              </Text>
+              <Text style={styles.scheduleValue}>{consultation.venue || '—'}</Text>
               <Text style={styles.scheduleSubtext}>
                 Room {consultation.room_number || 'N/A'}
               </Text>
@@ -271,7 +258,7 @@ const ConsultationDetailScreen = ({ route, navigation }) => {
         </View>
       </View>
 
-      {/* Academic Assessment Card */}
+      {/* Academic Notes */}
       <View style={styles.card}>
         <View style={styles.cardHeader}>
           <Text style={styles.cardTitle}>Academic Assessment</Text>
@@ -298,7 +285,7 @@ const ConsultationDetailScreen = ({ route, navigation }) => {
         </View>
       </View>
 
-      {/* Resolution & Remarks Card */}
+      {/* Resolution */}
       <View style={styles.card}>
         <View style={styles.cardHeader}>
           <Text style={styles.cardTitle}>Resolution & Remarks</Text>
@@ -323,7 +310,7 @@ const ConsultationDetailScreen = ({ route, navigation }) => {
         </View>
       </View>
 
-      {/* Bottom Spacing */}
+      {/* Spacing */}
       <View style={styles.bottomSpacing} />
     </ScrollView>
   );

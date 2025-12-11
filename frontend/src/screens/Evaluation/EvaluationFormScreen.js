@@ -9,8 +9,10 @@ import {
   ActivityIndicator,
   RefreshControl,
 } from 'react-native';
+
 import DateTimePicker from '@react-native-community/datetimepicker';
-import * as Burnt from 'burnt';
+import { showMessage } from 'react-native-flash-message';
+
 import { styles } from '../../styles/evalFormScreenStyle';
 
 import FormField from '../../components/evaluation/FormField';
@@ -18,11 +20,13 @@ import QuestionSection from '../../components/evaluation/QuestionSection';
 import CommentsBox from '../../components/evaluation/CommentsBox';
 import LegendBox from '../../components/evaluation/LegendBox';
 import { submitEvaluation, getQuestions } from '../../api/services/evaluation';
+
 import { AuthContext } from '../../context/AuthContext';
 import CollegeDropdown from '../../components/consultation/CollegeDropDown';
 
 const EvaluationFormScreen = ({ navigation }) => {
   const { accessToken } = useContext(AuthContext);
+
   const today = new Date();
 
   const [questions, setQuestions] = useState([]);
@@ -60,19 +64,22 @@ const EvaluationFormScreen = ({ navigation }) => {
     timeOfConference: '',
   });
 
+  // GET QUESTIONS
   const fetchQuestions = async () => {
     try {
       const data = await getQuestions(accessToken);
-      const formatted = data.map(q => ({
+
+      const formatted = data.map((q) => ({
         id: q.id,
         question: q.text,
         category: q.category,
       }));
+
       setQuestions(formatted);
     } catch (err) {
-      Burnt.toast({
-        title: 'Failed to refresh questions',
-        preset: 'error',
+      showMessage({
+        message: 'Failed to refresh questions.',
+        type: 'danger',
       });
     } finally {
       setLoading(false);
@@ -80,43 +87,60 @@ const EvaluationFormScreen = ({ navigation }) => {
     }
   };
 
+  useEffect(() => {
+    fetchQuestions();
+  }, []);
+
   const onRefresh = async () => {
     setRefreshing(true);
     await fetchQuestions();
   };
 
+  // DATE CHANGE HANDLER
   const handleDateChange = (field, event, selectedDate) => {
     const currentDate = selectedDate || new Date();
+
     if (field === 'date') setShowObsDate(false);
     if (field === 'dateOfConference') setShowConfDate(false);
+
     const formatted = currentDate.toISOString().split('T')[0];
-    setFormData(prev => ({ ...prev, [field]: formatted }));
+
+    setFormData((prev) => ({ ...prev, [field]: formatted }));
   };
 
+  // TIME CHANGE HANDLER
   const handleTimeChange = (field, event, selectedTime) => {
     const currentTime = selectedTime || new Date();
+
     if (field === 'time') setShowObsTime(false);
     if (field === 'timeOfConference') setShowConfTime(false);
+
     const hh = currentTime.getHours().toString().padStart(2, '0');
     const mm = currentTime.getMinutes().toString().padStart(2, '0');
-    setFormData(prev => ({ ...prev, [field]: `${hh}:${mm}` }));
+
+    setFormData((prev) => ({ ...prev, [field]: `${hh}:${mm}` }));
   };
 
+  // HANDLE RATING CHANGE
   const handleRatingChange = (questionId, rating) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       ratings: { ...prev.ratings, [questionId]: rating },
     }));
   };
 
+  // CALCULATE AVERAGE
   const getAverage = () => {
-    const values = Object.values(formData.ratings).filter(v => v !== 'NA');
+    const values = Object.values(formData.ratings).filter((v) => v !== 'NA');
     if (values.length === 0) return 0;
-    const numeric = values.map(v => Number(v));
+
+    const numeric = values.map((v) => Number(v));
     const sum = numeric.reduce((a, b) => a + b, 0);
+
     return (sum / numeric.length).toFixed(2);
   };
 
+  // SUBMIT FORM
   const handleSubmit = async () => {
     if (
       !formData.teacherName.trim() ||
@@ -124,17 +148,17 @@ const EvaluationFormScreen = ({ navigation }) => {
       !formData.subject.trim() ||
       !formData.roomNumber.trim()
     ) {
-      Burnt.toast({
-        title: 'Please fill out all required fields',
-        preset: 'error',
+      showMessage({
+        message: 'Please fill out all required fields.',
+        type: 'danger',
       });
       return;
     }
 
     if (Object.keys(formData.ratings).length === 0) {
-      Burnt.toast({
-        title: 'Please provide at least one rating',
-        preset: 'error',
+      showMessage({
+        message: 'Please provide at least one rating.',
+        type: 'danger',
       });
       return;
     }
@@ -152,25 +176,23 @@ const EvaluationFormScreen = ({ navigation }) => {
       average_rating: getAverage(),
       date_of_conference: formData.dateOfConference || null,
       time_of_conference: formData.timeOfConference || null,
-      responses: Object.entries(formData.ratings).map(
-        ([questionId, rating]) => ({
-          question: parseInt(questionId),
-          rating: rating === 'NA' ? 0 : rating,
-          remarks: '',
-        }),
-      ),
+      responses: Object.entries(formData.ratings).map(([questionId, rating]) => ({
+        question: parseInt(questionId),
+        rating: rating === 'NA' ? 0 : rating,
+        remarks: '',
+      })),
     };
 
     try {
-      const res = await submitEvaluation(payload, accessToken);
+      await submitEvaluation(payload, accessToken);
 
-      Burnt.toast({
-        title: 'Evaluation submitted successfully',
-        preset: 'done',
+      showMessage({
+        message: 'Evaluation submitted successfully.',
+        type: 'success',
       });
 
-      // reset
       const today = new Date();
+
       setFormData({
         teacherName: '',
         date: today.toISOString().split('T')[0],
@@ -183,22 +205,20 @@ const EvaluationFormScreen = ({ navigation }) => {
         dateOfConference: '',
         timeOfConference: '',
       });
+
       navigation.goBack();
     } catch (err) {
-      console.error('Error submitting:', err);
-      Burnt.toast({
-        title: 'Submission failed',
-        preset: 'error',
+      console.error('Submit Error:', err);
+      showMessage({
+        message: 'Submission failed.',
+        type: 'danger',
       });
     } finally {
       setSubmitting(false);
     }
   };
 
-  useEffect(() => {
-    fetchQuestions();
-  }, []);
-
+  // LOADING SCREEN
   if (loading) {
     return (
       <View
@@ -208,13 +228,12 @@ const EvaluationFormScreen = ({ navigation }) => {
         ]}
       >
         <ActivityIndicator size="large" color="#007BFF" />
-        <Text style={{ marginTop: 10, fontSize: 16 }}>
-          Loading questions...
-        </Text>
+        <Text style={{ marginTop: 10, fontSize: 16 }}>Loading questions...</Text>
       </View>
     );
   }
 
+  // MAIN UI
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -227,31 +246,26 @@ const EvaluationFormScreen = ({ navigation }) => {
         }
       >
         <View style={styles.MainSection}>
-          <Text style={styles.mainTitle}>
-            Evaluation for Classroom Instruction Form
-          </Text>
+          <Text style={styles.mainTitle}>Evaluation for Classroom Instruction Form</Text>
         </View>
 
-        {/* Basic Info */}
+        {/* BASIC INFO */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Basic Information</Text>
+
           <FormField
             label="Name of Teacher"
             value={formData.teacherName}
-            onChangeText={text =>
-              setFormData({ ...formData, teacherName: text })
-            }
+            onChangeText={(text) => setFormData({ ...formData, teacherName: text })}
           />
 
           <View style={styles.row}>
+            {/* OBSERVATION DATE */}
             <View style={styles.halfInput}>
               <TouchableOpacity onPress={() => setShowObsDate(true)}>
-                <FormField
-                  label="Date"
-                  value={formData.date}
-                  editable={false}
-                />
+                <FormField label="Date" value={formData.date} editable={false} />
               </TouchableOpacity>
+
               {showObsDate && (
                 <DateTimePicker
                   value={new Date(formData.date)}
@@ -262,6 +276,7 @@ const EvaluationFormScreen = ({ navigation }) => {
               )}
             </View>
 
+            {/* OBSERVATION TIME */}
             <View style={styles.halfInput}>
               <TouchableOpacity onPress={() => setShowObsTime(true)}>
                 <FormField
@@ -270,6 +285,7 @@ const EvaluationFormScreen = ({ navigation }) => {
                   editable={false}
                 />
               </TouchableOpacity>
+
               {showObsTime && (
                 <DateTimePicker
                   value={new Date()}
@@ -281,9 +297,10 @@ const EvaluationFormScreen = ({ navigation }) => {
             </View>
           </View>
 
+          {/* COLLEGE DROPDOWN */}
           <CollegeDropdown
             college={formData.college}
-            setCollege={val => setFormData({ ...formData, college: val })}
+            setCollege={(val) => setFormData({ ...formData, college: val })}
             show={showCollegeDropdown}
             setShow={setShowCollegeDropdown}
             colleges={colleges}
@@ -292,43 +309,46 @@ const EvaluationFormScreen = ({ navigation }) => {
           <FormField
             label="Room Number"
             value={formData.roomNumber}
-            onChangeText={text =>
-              setFormData({ ...formData, roomNumber: text })
-            }
+            onChangeText={(t) => setFormData({ ...formData, roomNumber: t })}
           />
+
           <FormField
             label="Subject"
             value={formData.subject}
-            onChangeText={text => setFormData({ ...formData, subject: text })}
+            onChangeText={(t) => setFormData({ ...formData, subject: t })}
           />
         </View>
 
-        {/* Questions */}
+        {/* QUESTION SECTIONS */}
         <View style={styles.section}>
           <QuestionSection
             title="CONTENT"
-            questions={questions.filter(q => q.category === 'content')}
+            questions={questions.filter((q) => q.category === 'content')}
             ratings={formData.ratings}
             handleRatingChange={handleRatingChange}
           />
+
           <QuestionSection
             title="TEACHING PROCEDURES"
-            questions={questions.filter(q => q.category === 'teaching')}
+            questions={questions.filter((q) => q.category === 'teaching')}
             ratings={formData.ratings}
             handleRatingChange={handleRatingChange}
           />
+
           <QuestionSection
             title="TEACHER-STUDENT INTERACTION"
-            questions={questions.filter(q => q.category === 'interaction')}
+            questions={questions.filter((q) => q.category === 'interaction')}
             ratings={formData.ratings}
             handleRatingChange={handleRatingChange}
           />
         </View>
 
-        {/* Conference Info */}
+        {/* CONFERENCE DETAILS */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Conference Details</Text>
+
           <View style={styles.row}>
+            {/* DATE OF CONFERENCE */}
             <View style={styles.halfInput}>
               <TouchableOpacity onPress={() => setShowConfDate(true)}>
                 <FormField
@@ -338,6 +358,7 @@ const EvaluationFormScreen = ({ navigation }) => {
                   placeholder="YYYY-MM-DD"
                 />
               </TouchableOpacity>
+
               {showConfDate && (
                 <DateTimePicker
                   value={
@@ -347,13 +368,12 @@ const EvaluationFormScreen = ({ navigation }) => {
                   }
                   mode="date"
                   display="default"
-                  onChange={(e, d) =>
-                    handleDateChange('dateOfConference', e, d)
-                  }
+                  onChange={(e, d) => handleDateChange('dateOfConference', e, d)}
                 />
               )}
             </View>
 
+            {/* TIME OF CONFERENCE */}
             <View style={styles.halfInput}>
               <TouchableOpacity onPress={() => setShowConfTime(true)}>
                 <FormField
@@ -363,6 +383,7 @@ const EvaluationFormScreen = ({ navigation }) => {
                   placeholder="HH:MM"
                 />
               </TouchableOpacity>
+
               {showConfTime && (
                 <DateTimePicker
                   value={new Date()}
@@ -377,20 +398,20 @@ const EvaluationFormScreen = ({ navigation }) => {
           </View>
         </View>
 
-        {/* Average */}
+        {/* AVERAGE DISPLAY */}
         <View style={styles.RatingScaleInstruction}>
           <Text style={styles.RatingScaleInstructionText}>
             AVERAGE: {getAverage()}
           </Text>
         </View>
 
-        {/* Comments */}
+        {/* COMMENTS */}
         <CommentsBox
           value={formData.comments}
-          onChangeText={text => setFormData({ ...formData, comments: text })}
+          onChangeText={(text) => setFormData({ ...formData, comments: text })}
         />
 
-        {/* Submit */}
+        {/* SUBMIT BUTTON */}
         <TouchableOpacity
           style={[
             styles.submitButton,
@@ -405,6 +426,8 @@ const EvaluationFormScreen = ({ navigation }) => {
             <Text style={styles.submitText}>SUBMIT EVALUATION</Text>
           )}
         </TouchableOpacity>
+
+        <View style={{ height: 30 }} />
       </ScrollView>
     </KeyboardAvoidingView>
   );
