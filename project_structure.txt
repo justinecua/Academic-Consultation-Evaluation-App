@@ -1,0 +1,56 @@
+clevu/
+├── .gitignore
+├── App.js
+├── app.json
+├── babel.config.js
+├── package.json
+├── README.md
+├── assets/
+│   ├── fonts/
+│   └── images/
+├── src/
+│   ├── api/
+│   │   ├── auth.js
+│   │   ├── consultations.js
+│   │   └── evaluations.js
+│   ├── components/
+│   │   ├── common/
+│   │   │   ├── Button.js
+│   │   │   ├── Card.js
+│   │   │   ├── Input.js
+│   │   │   ├── RatingScale.js
+│   │   │   └── SignaturePad.js
+│   │   └── forms/
+│   │       ├── ConsultationForm.js
+│   │       └── EvaluationForm.js
+│   ├── constants/
+│   │   ├── colors.js
+│   │   ├── routes.js
+│   │   └── strings.js
+│   ├── context/
+│   │   └── AuthContext.js
+│   ├── navigation/
+│   │   ├── AppNavigator.js
+│   │   └── MainTabNavigator.js
+│   ├── screens/
+│   │   ├── Consultation/
+│   │   │   ├── ConsultationDetailScreen.js
+│   │   │   ├── ConsultationFormScreen.js
+│   │   │   └── ConsultationListScreen.js
+│   │   ├── Evaluation/
+│   │   │   ├── EvaluationDetailScreen.js
+│   │   │   ├── EvaluationFormScreen.js
+│   │   │   └── EvaluationListScreen.js
+│   │   ├── DashboardScreen.js
+│   │   ├── LoginScreen.js
+│   │   ├── ProfileScreen.js
+│   │   ├── ReportsScreen.js
+│   │   └── SearchScreen.js
+│   ├── styles/
+│   │   └── globalStyles.js
+│   └── utils/
+│       ├── helpers.js
+│       └── validators.js
+└── __tests__/
+    └── components/
+        └── Button.test.js
