@@ -1,27 +1,27 @@
-import { StyleSheet, Dimensions } from 'react-native';
-
-const { width } = Dimensions.get('window');
+import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F8FAFC',
+    backgroundColor: '#F4F6FA',
   },
-  // Header Styles
+
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 20,
-    paddingVertical: 16,
-    backgroundColor: '#FFFFFF',
-    borderBottomWidth: 1,
-    borderBottomColor: '#F1F5F9',
+    paddingVertical: 18,
+    backgroundColor: '#0D2460',
+    borderBottomWidth: 0,
   },
   headerTitle: {
-    fontSize: 20,
-    fontWeight: '600',
-    color: '#0F172A',
+    fontSize: 18,
+    fontWeight: '700',
+    color: '#FFFFFF',
+    fontFamily: 'Nunito-ExtraBold',
+    flex: 1,
+    marginRight: 12,
   },
   actionButtons: {
     flexDirection: 'row',
@@ -29,26 +29,23 @@ export const styles = StyleSheet.create({
   },
   iconButton: {
     padding: 8,
-    borderRadius: 8,
-    backgroundColor: '#F8FAFC',
+    borderRadius: 10,
+    backgroundColor: 'rgba(255,255,255,0.12)',
   },
-  // Card Styles
+
   card: {
     backgroundColor: '#FFFFFF',
     marginHorizontal: 16,
-    marginVertical: 8,
-    borderRadius: 12,
+    marginVertical: 6,
+    borderRadius: 14,
     padding: 16,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.05,
-    shadowRadius: 3,
+    shadowColor: '#0D2460',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.06,
+    shadowRadius: 8,
     elevation: 2,
-    borderWidth: 1,
-    borderColor: '#F1F5F9',
+    borderWidth: 0.5,
+    borderColor: '#E2E8F2',
   },
   cardHeader: {
     flexDirection: 'row',
@@ -59,18 +56,20 @@ export const styles = StyleSheet.create({
     width: 32,
     height: 32,
     borderRadius: 8,
-    backgroundColor: '#EFF6FF',
+    backgroundColor: '#EBF1FC',
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 12,
   },
   cardTitle: {
     flex: 1,
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#0F172A',
+    fontSize: 15,
+    fontWeight: '700',
+    color: '#0D2460',
+    fontFamily: 'Nunito-Bold',
   },
-  // Info Grid Styles
+
+  // Info Grid
   infoGrid: {
     gap: 0,
   },
@@ -84,55 +83,65 @@ export const styles = StyleSheet.create({
     paddingVertical: 12,
   },
   infoLabel: {
-    fontSize: 14,
-    color: '#64748B',
+    fontSize: 13,
+    color: '#8096B8',
     fontWeight: '500',
     flex: 1,
+    fontFamily: 'Nunito-SemiBold',
   },
   infoValue: {
-    fontSize: 14,
-    color: '#0F172A',
-    fontWeight: '400',
+    fontSize: 13,
+    color: '#0D2460',
+    fontWeight: '600',
     flex: 1,
     textAlign: 'right',
+    fontFamily: 'Nunito-Bold',
   },
 
+  // Schedule
   scheduleContainer: {
-    gap: 12,
+    gap: 4,
   },
   scheduleItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 8,
+    paddingVertical: 10,
   },
   scheduleIcon: {
     width: 36,
     height: 36,
-    borderRadius: 8,
+    borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 12,
+    backgroundColor: '#F0F4FB',
   },
   scheduleContent: {
     flex: 1,
   },
   scheduleLabel: {
-    fontSize: 12,
-    color: '#64748B',
-    fontWeight: '500',
+    fontSize: 11,
+    color: '#A0AECB',
+    fontWeight: '600',
     marginBottom: 2,
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
+    fontFamily: 'Nunito-Bold',
   },
   scheduleValue: {
     fontSize: 14,
-    color: '#0F172A',
-    fontWeight: '400',
+    color: '#0D2460',
+    fontWeight: '600',
+    fontFamily: 'Nunito-Bold',
   },
   scheduleSubtext: {
     fontSize: 12,
-    color: '#94A3B8',
+    color: '#A0AECB',
     marginTop: 2,
+    fontFamily: 'Nunito-SemiBold',
   },
-  // Text Content Styles
+
+  // Text Content
   textContent: {
     gap: 0,
   },
@@ -140,61 +149,68 @@ export const styles = StyleSheet.create({
     paddingVertical: 12,
   },
   textLabel: {
-    fontSize: 14,
-    color: '#64748B',
-    fontWeight: '500',
-    marginBottom: 8,
+    fontSize: 11,
+    color: '#A0AECB',
+    fontWeight: '600',
+    marginBottom: 6,
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
+    fontFamily: 'Nunito-Bold',
   },
   textValue: {
-    fontSize: 14,
-    color: '#0F172A',
+    fontSize: 12,
+    color: '#0D2460',
     fontWeight: '400',
-    lineHeight: 20,
+    lineHeight: 21,
   },
-  // Common Styles
+
   divider: {
-    height: 1,
-    backgroundColor: '#F1F5F9',
+    height: 0.5,
+    backgroundColor: '#E2E8F2',
   },
-  // Loading & Error States
+
   loadingContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F8FAFC',
+    backgroundColor: '#F4F6FA',
   },
   loadingText: {
     marginTop: 12,
-    fontSize: 14,
-    color: '#64748B',
+    fontSize: 13,
+    color: '#8096B8',
+    fontFamily: 'Nunito-SemiBold',
   },
   errorContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F8FAFC',
+    backgroundColor: '#F4F6FA',
     paddingHorizontal: 40,
   },
   errorText: {
-    fontSize: 16,
-    color: '#0F172A',
-    fontWeight: '500',
+    fontSize: 15,
+    color: '#0D2460',
+    fontWeight: '600',
     textAlign: 'center',
     marginBottom: 8,
+    fontFamily: 'Nunito-Bold',
   },
   retryButton: {
-    backgroundColor: '#2563EB',
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    borderRadius: 8,
+    backgroundColor: '#0D2460',
+    paddingHorizontal: 24,
+    paddingVertical: 11,
+    borderRadius: 12,
     marginTop: 12,
   },
   retryButtonText: {
     color: '#FFFFFF',
     fontSize: 14,
-    fontWeight: '500',
+    fontWeight: '600',
+    fontFamily: 'Nunito-Bold',
   },
+
   bottomSpacing: {
-    height: 20,
+    height: 100,
   },
 });

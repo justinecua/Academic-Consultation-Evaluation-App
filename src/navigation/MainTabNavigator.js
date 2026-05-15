@@ -114,11 +114,6 @@ const RootNavigator = () => (
 
 const styles = StyleSheet.create({
   tabBar: {
-    position: 'absolute',
-    bottom: -5,
-    left: 20,
-    right: 20,
-    height: 70,
     borderRadius: 20,
     backgroundColor: 'white',
     borderTopWidth: 0,
@@ -127,6 +122,9 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.1,
     shadowRadius: 12,
+    width: '90%',
+    alignSelf: 'center',
+    justifyContent: 'center',
   },
   tabItem: {
     paddingVertical: 8,

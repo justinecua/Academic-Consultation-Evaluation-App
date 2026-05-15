@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity } from 'react-native';
-import { RefreshCw } from 'lucide-react-native';
+import { RefreshCw, MessageSquare } from 'lucide-react-native';
 import {
   consultationStyles as styles,
   COLORS,
@@ -8,6 +8,10 @@ import {
 const ConsultationEmptyState = ({ errorMsg, onRetry }) => {
   return (
     <View style={styles.emptyWrap}>
+      <View style={styles.emptyIcon}>
+        <MessageSquare size={28} color={COLORS.accent} />
+      </View>
+
       <Text style={styles.emptyTitle}>
         {errorMsg ? 'Something went wrong' : 'No consultations yet'}
       </Text>
@@ -17,7 +21,7 @@ const ConsultationEmptyState = ({ errorMsg, onRetry }) => {
       </Text>
 
       <TouchableOpacity style={styles.retryBtn} onPress={onRetry}>
-        <RefreshCw size={16} color={COLORS.primary} />
+        <RefreshCw size={15} color={COLORS.accent} />
         <Text style={styles.retryText}>Retry</Text>
       </TouchableOpacity>
     </View>

@@ -11,14 +11,16 @@ const DetailHeader = ({ consultation, id }) => {
 
   return (
     <View style={styles.header}>
-      <Text style={styles.headerTitle}>{consultation.student_name}</Text>
+      <Text style={styles.headerTitle} numberOfLines={2}>
+        {consultation.student_name}
+      </Text>
 
       <View style={styles.actionButtons}>
         <TouchableOpacity
           onPress={() => handleDownloadPDF(accessToken, id)}
           style={styles.iconButton}
         >
-          <Download size={20} color="#6B7280" />
+          <Download size={20} color="#FFFFFF" />
         </TouchableOpacity>
       </View>
     </View>

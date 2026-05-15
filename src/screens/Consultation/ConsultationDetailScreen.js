@@ -15,14 +15,21 @@ const ConsultationDetailScreen = ({ route }) => {
   const { accessToken } = useContext(AuthContext);
   const { consultation, loading, refreshing, refetch, refresh } =
     useConsultationDetail(accessToken, id);
+
   if (loading) return <LoadingState />;
   if (!consultation) return <ErrorState onRetry={refetch} />;
 
   return (
     <ScrollView
       style={styles.container}
+      contentContainerStyle={{ paddingTop: 8, paddingBottom: 100 }}
       refreshControl={
-        <RefreshControl refreshing={refreshing} onRefresh={refresh} />
+        <RefreshControl
+          refreshing={refreshing}
+          onRefresh={refresh}
+          tintColor="#0D2460"
+          colors={['#0D2460']}
+        />
       }
       showsVerticalScrollIndicator={false}
     >
@@ -30,6 +37,7 @@ const ConsultationDetailScreen = ({ route }) => {
       <InfoCard consultation={consultation} />
       <ScheduleCard consultation={consultation} />
       <TextSectionCard consultation={consultation} />
+      <ScrollView style={styles.bottomSpacing} />
     </ScrollView>
   );
 };

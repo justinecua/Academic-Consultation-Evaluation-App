@@ -24,7 +24,7 @@ const ConsultationListScreen = ({ navigation }) => {
   if (loading) {
     return (
       <View style={styles.loadingWrap}>
-        <StatusBar barStyle="dark-content" />
+        <StatusBar barStyle="light-content" backgroundColor="#0D2460" />
         <ActivityIndicator size="large" color={COLORS.primary} />
         <Text style={styles.loadingText}>Loading consultations…</Text>
       </View>
@@ -33,7 +33,7 @@ const ConsultationListScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="dark-content" />
+      <StatusBar barStyle="light-content" backgroundColor="#0D2460" />
 
       <FlatList
         data={consultations}

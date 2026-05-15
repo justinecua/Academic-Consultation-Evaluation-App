@@ -1,25 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
   TouchableOpacity,
-  StyleSheet,
   ScrollView,
   Alert,
+  Animated,
 } from 'react-native';
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import {
   User,
   LogOut,
-  Mail,
-  Phone,
-  Building,
+  ChevronDown,
+  ChevronUp,
   ChevronRight,
+  Shield,
+  Info,
+  Code2,
+  Tag,
+  LogOutIcon,
 } from 'lucide-react-native';
+import { styles } from '../styles/profileScreenStyle';
+import ScreenContainer from './ScreenContainer';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const ProfileScreen = ({ navigation }) => {
   const { user, logout } = useContext(AuthContext);
+
+  const [showPrivacyPolicy, setShowPrivacyPolicy] = useState(false);
+  const [showAbout, setShowAbout] = useState(false);
+  const [showDeveloper, setShowDeveloper] = useState(false);
 
   const handleLogout = () => {
     Alert.alert(
@@ -29,20 +40,31 @@ const ProfileScreen = ({ navigation }) => {
         { text: 'Cancel', style: 'cancel' },
         { text: 'Sign Out', style: 'destructive', onPress: logout },
       ],
-      { cancelable: true }
+      { cancelable: true },
     );
+  };
+
+  const getInitials = name => {
+    if (!name) return 'U';
+    return name
+      .split(' ')
+      .map(n => n[0])
+      .join('')
+      .toUpperCase()
+      .slice(0, 2);
   };
 
   const ProfileField = ({ icon: Icon, label, value }) => (
     <View style={styles.fieldContainer}>
       <View style={styles.fieldHeader}>
         <View style={styles.fieldLeft}>
-          <Icon size={20} color="#64748B" />
+          <View style={styles.fieldIconWrap}>
+            <Icon size={15} color="#3B6FD4" />
+          </View>
           <Text style={styles.fieldLabel}>{label}</Text>
         </View>
-        <ChevronRight size={20} color="#CBD5E1" />
+        <ChevronRight size={14} color="#C8D6EE" />
       </View>
-
       {value ? (
         <Text style={styles.fieldValue}>{value}</Text>
       ) : (
@@ -51,186 +73,128 @@ const ProfileScreen = ({ navigation }) => {
     </View>
   );
 
-  return (
-    <View style={styles.container}>
-      <ScrollView
-        style={styles.scrollContainer}
-        showsVerticalScrollIndicator={false}
+  const AccordionItem = ({ icon: Icon, title, content, isOpen, onToggle }) => (
+    <View style={styles.accordionItem}>
+      <TouchableOpacity
+        style={styles.accordionHeader}
+        onPress={onToggle}
+        activeOpacity={0.7}
       >
-        {/* Header Section */}
-        <View style={styles.header}>
-          <View style={styles.avatarContainer}>
-            <User size={32} color="#3B82F6" />
+        <View style={styles.accordionLeft}>
+          <View style={styles.accordionIconWrap}>
+            <Icon size={15} color="#3B6FD4" />
           </View>
-
-          <Text style={styles.name}>
-            {user?.name ||
-              `${user?.first_name || ''} ${user?.last_name || ''}`.trim() ||
-              'User'}
-          </Text>
-
-          <Text style={styles.role}>
-            {user?.personnelinfo?.position || 'Staff'}
-          </Text>
+          <Text style={styles.accordionTitle}>{title}</Text>
         </View>
-
-        {/* Profile Information */}
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Profile Information</Text>
-
-          <ProfileField icon={User} label="Username" value={user?.username} />
-          <ProfileField icon={Mail} label="Email" value={user?.email} />
-          <ProfileField
-            icon={Phone}
-            label="Phone"
-            value={user?.phone || user?.phone_number}
-          />
-          <ProfileField
-            icon={Building}
-            label="Department"
-            value={user?.department}
-          />
-
-          {user?.employee_id && (
-            <ProfileField
-              icon={User}
-              label="Employee ID"
-              value={user.employee_id}
-            />
-          )}
+        {isOpen ? (
+          <ChevronUp size={15} color="#8AAAD6" />
+        ) : (
+          <ChevronDown size={15} color="#8AAAD6" />
+        )}
+      </TouchableOpacity>
+      {isOpen && (
+        <View style={styles.accordionBody}>
+          <Text style={styles.accordionText}>{content}</Text>
         </View>
-
-        <View style={styles.bottomSpacing} />
-      </ScrollView>
-
-      {/* Footer Logout Button */}
-      <View style={styles.footer}>
-        <TouchableOpacity
-          style={styles.logoutButton}
-          onPress={handleLogout}
-          activeOpacity={0.85}
-        >
-          <LogOut size={19} color="#EF4444" />
-          <Text style={styles.logoutText}>Sign Out</Text>
-        </TouchableOpacity>
-      </View>
+      )}
     </View>
+  );
+
+  const privacyPolicyContent = `This application is committed to protecting and respecting your privacy. We collect personal information such as your name, username, and contact details solely for authentication and to provide a personalized experience.\n\nWe do not share your data with third parties unless required by law. Storage and processing are handled securely in compliance with local data protection regulations.`;
+
+  const aboutContent = `Assessly\n\nThis app helps users manage their profiles, access consultation forms, and evaluate classroom instructions.\n\nFeatures include profile management, teacher evaluation forms, academic consultation tracking\n\n`;
+
+  const developerContent = `\nDeveloped by Justine Cua\n`;
+
+  return (
+    <ScreenContainer style={styles.safe}>
+      <SafeAreaView style={styles.safeInner}>
+        <View style={styles.container}>
+          <ScrollView
+            style={styles.scrollContainer}
+            contentContainerStyle={styles.scrollContent}
+            showsVerticalScrollIndicator={false}
+          >
+            {/* Profile Section */}
+            <View style={styles.sectionGroup}>
+              <Text style={styles.groupLabel}>Account</Text>
+              <View style={styles.card}>
+                <ProfileField
+                  icon={User}
+                  label="Username"
+                  value={user?.username}
+                />
+              </View>
+            </View>
+
+            {/* App Info Section */}
+            <View style={styles.sectionGroup}>
+              <Text style={styles.groupLabel}>App Information</Text>
+              <View style={styles.card}>
+                {/* Version Row */}
+                <View style={styles.fieldContainer}>
+                  <View style={styles.fieldHeader}>
+                    <View style={styles.fieldLeft}>
+                      <View style={styles.fieldIconWrap}>
+                        <Tag size={15} color="#3B6FD4" />
+                      </View>
+                      <Text style={styles.fieldLabel}>Version</Text>
+                    </View>
+                  </View>
+                  <View style={styles.versionBadge}>
+                    <Text style={styles.versionBadgeText}>v1.0.0</Text>
+                  </View>
+                </View>
+              </View>
+
+              {/* Accordion Card */}
+              <View style={styles.card}>
+                <AccordionItem
+                  icon={Shield}
+                  title="Privacy Policy"
+                  content={privacyPolicyContent}
+                  isOpen={showPrivacyPolicy}
+                  onToggle={() => setShowPrivacyPolicy(!showPrivacyPolicy)}
+                />
+                <View style={styles.accordionDivider} />
+                <AccordionItem
+                  icon={Info}
+                  title="About"
+                  content={aboutContent}
+                  isOpen={showAbout}
+                  onToggle={() => setShowAbout(!showAbout)}
+                />
+                <View style={styles.accordionDivider} />
+                <AccordionItem
+                  icon={Code2}
+                  title="Developer"
+                  content={developerContent}
+                  isOpen={showDeveloper}
+                  onToggle={() => setShowDeveloper(!showDeveloper)}
+                />
+              </View>
+            </View>
+
+            <View style={styles.card2}>
+              <TouchableOpacity
+                style={styles.fieldContainer}
+                onPress={handleLogout}
+                activeOpacity={0.75}
+              >
+                <View style={styles.fieldHeader}>
+                  <View style={styles.fieldIconWrap}>
+                    <LogOutIcon size={15} color="#3B6FD4" />
+                  </View>
+
+                  <Text style={styles.fieldLabel}>Logout</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+          </ScrollView>
+        </View>
+      </SafeAreaView>
+    </ScreenContainer>
   );
 };
 
 export default ProfileScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F8FAFC',
-  },
-  scrollContainer: {
-    flex: 1,
-  },
-  header: {
-    marginTop: 20,
-    alignItems: 'center',
-    paddingVertical: 32,
-    paddingHorizontal: 24,
-    backgroundColor: '#FFFFFF',
-    borderBottomWidth: 1,
-    borderBottomColor: '#F1F5F9',
-  },
-  avatarContainer: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    backgroundColor: '#EFF6FF',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 16,
-    borderWidth: 3,
-    borderColor: '#DBEAFE',
-  },
-  name: {
-    fontSize: 24,
-    fontWeight: '700',
-    color: '#1E293B',
-    marginBottom: 4,
-    textAlign: 'center',
-  },
-  role: {
-    fontSize: 16,
-    color: '#64748B',
-    textAlign: 'center',
-  },
-  section: {
-    backgroundColor: '#FFFFFF',
-    marginTop: 16,
-    paddingHorizontal: 0,
-  },
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: '#1E293B',
-    paddingHorizontal: 24,
-    paddingVertical: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: '#F1F5F9',
-  },
-  fieldContainer: {
-    paddingHorizontal: 24,
-    paddingVertical: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: '#F1F5F9',
-  },
-  fieldHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 8,
-  },
-  fieldLeft: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 12,
-  },
-  fieldLabel: {
-    fontSize: 14,
-    fontWeight: '500',
-    color: '#64748B',
-  },
-  fieldValue: {
-    fontSize: 16,
-    color: '#1E293B',
-    fontWeight: '400',
-  },
-  fieldEmpty: {
-    fontSize: 16,
-    color: '#94A3B8',
-    fontStyle: 'italic',
-  },
-  footer: {
-    padding: 24,
-    backgroundColor: '#FFFFFF',
-    borderTopWidth: 1,
-    borderTopColor: '#F1F5F9',
-    paddingBottom: 90,
-  },
-  logoutButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 12,
-    paddingVertical: 16,
-    paddingHorizontal: 24,
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: '#FECACA',
-    backgroundColor: '#FFFFFF',
-  },
-  logoutText: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#EF4444',
-  },
-  bottomSpacing: {
-    height: 20,
-  },
-});

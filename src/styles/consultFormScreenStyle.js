@@ -2,10 +2,10 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   mainTitle: {
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: '700',
     textAlign: 'center',
-    color: '#333',
+    color: '#0D2460',
   },
   container: {
     flex: 1,
@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
   },
   scrollContainer: {
     padding: 15,
-    paddingBottom: 80,
+    paddingBottom: 25,
   },
   header: {
     flexDirection: 'row',
@@ -51,22 +51,34 @@ export const styles = StyleSheet.create({
     elevation: 2,
   },
   sectionTitle: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: '#2D3748',
-    marginBottom: 16,
-    paddingBottom: 8,
-    borderBottomWidth: 1,
-    borderBottomColor: '#EDF2F7',
+    fontSize: 12,
+    fontWeight: '800',
+    color: '#667caa',
+    paddingBottom: 15,
+    marginBottom: 20,
+    borderBottomWidth: 0.5,
+    borderBottomColor: '#E2E8F2',
+    fontFamily: 'Nunito-Bold',
+    textTransform: 'uppercase',
+    letterSpacing: 0.6,
   },
   inputContainer: {
     marginBottom: 16,
   },
   label: {
-    fontSize: 14,
-    fontWeight: '500',
-    color: '#4A5568',
-    marginBottom: 10,
+    fontSize: 12,
+    fontWeight: '800',
+    color: '#667caa',
+    paddingBottom: 10,
+    borderBottomColor: '#E2E8F2',
+    fontFamily: 'Nunito-Bold',
+    textTransform: 'uppercase',
+  },
+
+  labelDropdown: {
+    fontSize: 12,
+    fontWeight: 600,
+    color: '#6782b3',
   },
 
   input: {
@@ -75,8 +87,8 @@ export const styles = StyleSheet.create({
     borderColor: '#E2E8F0',
     borderRadius: 8,
     padding: 10,
-    fontSize: 15,
-    color: '#1A202C',
+    fontSize: 13,
+    color: '#6782b3',
   },
   row: {
     flexDirection: 'row',
@@ -99,7 +111,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 1,
   },
   submitButton: {
-    backgroundColor: '#5E72E4',
+    backgroundColor: '#0D2460',
     borderRadius: 8,
     padding: 16,
     alignItems: 'center',
@@ -146,9 +158,12 @@ export const styles = StyleSheet.create({
     padding: 16,
     borderBottomWidth: 1,
     borderBottomColor: '#EDF2F7',
+    fontSize: 12,
+    color: '#1A202C',
   },
   dropdownItemText: {
-    fontSize: 15,
-    color: '#2D3748',
+    fontSize: 12,
+    fontWeight: 600,
+    color: '#6782b3',
   },
 });

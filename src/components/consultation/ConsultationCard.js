@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity } from 'react-native';
-import { Calendar } from 'lucide-react-native';
+import { Calendar, ChevronRight } from 'lucide-react-native';
 import {
   consultationStyles as styles,
   COLORS,
@@ -18,7 +18,7 @@ const formatDate = dateString => {
 };
 
 const buildTermSemester = (term, semester) => {
-  if (term && semester) return `${term} - ${semester} Semester`;
+  if (term && semester) return `${term} · ${semester} Sem`;
   return semester || '';
 };
 
@@ -49,11 +49,25 @@ const ConsultationCard = ({ item, onPress }) => {
         </View>
       </View>
 
-      {!!termSemester && (
-        <View style={styles.badge}>
-          <Text style={styles.badgeText}>{termSemester}</Text>
+      <View style={{ alignItems: 'flex-end', gap: 8 }}>
+        {!!termSemester && (
+          <View style={styles.badge}>
+            <Text style={styles.badgeText}>{termSemester}</Text>
+          </View>
+        )}
+        <View
+          style={{
+            width: 28,
+            height: 28,
+            borderRadius: 8,
+            backgroundColor: COLORS.emptyBg,
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <ChevronRight size={15} color={COLORS.accent} />
         </View>
-      )}
+      </View>
     </TouchableOpacity>
   );
 };

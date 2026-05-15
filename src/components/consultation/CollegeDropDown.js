@@ -19,9 +19,7 @@ const CollegeDropdown = ({ college, setCollege, show, setShow, colleges }) => (
         onPress={() => setShow(true)}
       >
         <View style={{ flex: 1 }}>
-          <Text
-            style={[{ fontSize: 15, color: college ? '#1A202C' : '#A0AEC0' }]}
-          >
+          <Text style={styles.labelDropdown}>
             {college || 'Select college'}
           </Text>
         </View>

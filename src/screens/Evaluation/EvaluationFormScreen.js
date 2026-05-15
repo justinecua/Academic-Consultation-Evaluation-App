@@ -51,7 +51,19 @@ const EvaluationFormScreen = ({ navigation }) => {
         }
       >
         <FormHeader />
+
         <BasicInfoSection form={form} />
+        <View style={styles.instructionCard}>
+          <Text style={styles.instructionTitle}>
+            Rate the teacher on each item following the given rating scale.
+          </Text>
+
+          <Text style={styles.instructionScale}>
+            5 - Excellent 4 - Very Good 3 - Good 2 - Fair 1 - Poor NA = Not
+            Applicable
+          </Text>
+        </View>
+
         <QuestionSections form={form} />
         <ConferenceSection form={form} />
         <AverageDisplay average={form.getAverage()} />

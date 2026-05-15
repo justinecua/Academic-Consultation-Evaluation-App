@@ -15,7 +15,7 @@ const EvaluationListScreen = ({ navigation }) => {
   if (loading) {
     return (
       <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#5E72E4" />
+        <ActivityIndicator size="large" color="#0D2460" />
         <Text style={styles.loadingText}>Loading evaluations...</Text>
       </View>
     );
@@ -39,7 +39,10 @@ const EvaluationListScreen = ({ navigation }) => {
         )}
         ItemSeparatorComponent={EvaluationSeparator}
         ListEmptyComponent={<EvaluationEmptyState onRefresh={refresh} />}
-        contentContainerStyle={evaluations.length === 0 && styles.emptyList}
+        contentContainerStyle={[
+          { paddingTop: 16, paddingBottom: 100 },
+          evaluations.length === 0 && styles.emptyList,
+        ]}
         showsVerticalScrollIndicator={false}
         refreshing={refreshing}
         onRefresh={refresh}
