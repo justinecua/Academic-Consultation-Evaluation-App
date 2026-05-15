@@ -6,15 +6,16 @@ const SubmitButton = ({ submitting, handleSubmit }) => {
     <TouchableOpacity
       style={[
         styles.submitButton,
-        submitting && { backgroundColor: '#A0AEC0' },
+        submitting && { backgroundColor: '#8096B8' },
       ]}
       onPress={handleSubmit}
       disabled={submitting}
+      activeOpacity={0.8}
     >
       {submitting ? (
         <ActivityIndicator color="#fff" />
       ) : (
-        <Text style={styles.submitText}>Submit Consultation</Text>
+        <Text style={styles.submitText}>SUBMIT CONSULTATION</Text>
       )}
     </TouchableOpacity>
   );

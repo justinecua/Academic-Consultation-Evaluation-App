@@ -7,6 +7,8 @@ import { useDashboardActions } from '../hooks/useDashboardActions';
 import DashboardHeader from '../components/dashboard/DashboardHeader';
 import DashboardStats from '../components/dashboard/DashboardStats';
 import DashboardActions from '../components/dashboard/DashboardActions';
+import ScreenContainer from './ScreenContainer';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const DashboardScreen = ({ navigation }) => {
   const { accessToken, user } = useContext(AuthContext);
@@ -14,19 +16,17 @@ const DashboardScreen = ({ navigation }) => {
   const actions = useDashboardActions(navigation);
 
   return (
-    <ScrollView
-      style={styles.container}
-      showsVerticalScrollIndicator={false}
-      contentContainerStyle={{ paddingBottom: 40 }}
-    >
-      <DashboardHeader greeting={actions.getGreeting()} user={user} />
-      <DashboardStats evalCount={evalCount} consultCount={consultCount} />
-      <DashboardActions
-        evalCount={evalCount}
-        consultCount={consultCount}
-        {...actions}
-      />
-    </ScrollView>
+    <ScreenContainer style={styles.safe}>
+      <SafeAreaView style={styles.safeInner}>
+        <DashboardHeader greeting={actions.getGreeting()} user={user} />
+        <DashboardStats evalCount={evalCount} consultCount={consultCount} />
+        <DashboardActions
+          evalCount={evalCount}
+          consultCount={consultCount}
+          {...actions}
+        />
+      </SafeAreaView>
+    </ScreenContainer>
   );
 };
 

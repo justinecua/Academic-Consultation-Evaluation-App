@@ -1,5 +1,5 @@
 import { View, Text, Dimensions } from 'react-native';
-import { ClipboardList, BarChart3 } from 'lucide-react-native';
+import { ClipboardList, MessageSquare } from 'lucide-react-native';
 import { styles } from '../../styles/dashboardStyle';
 
 const DashboardStats = ({ evalCount, consultCount }) => {
@@ -8,10 +8,10 @@ const DashboardStats = ({ evalCount, consultCount }) => {
 
   return (
     <View style={styles.statsContainer}>
-      {/* Evaluation */}
+      {/* Evaluations */}
       <View style={styles.statCard}>
-        <View style={[styles.statIcon, { backgroundColor: '#EBF5FF' }]}>
-          <ClipboardList size={20} color="#5E72E4" />
+        <View style={[styles.statIcon, { backgroundColor: '#EBF1FC' }]}>
+          <ClipboardList size={20} color="#1A4BAD" />
         </View>
         <View style={styles.statText}>
           <Text
@@ -22,15 +22,15 @@ const DashboardStats = ({ evalCount, consultCount }) => {
           <Text
             style={[styles.statLabel, isSmallScreen && styles.statLabelSmall]}
           >
-            Evaluation
+            Evaluations
           </Text>
         </View>
       </View>
 
-      {/* Consultation */}
+      {/* Consultations */}
       <View style={styles.statCard}>
-        <View style={[styles.statIcon, { backgroundColor: '#F0FFF4' }]}>
-          <BarChart3 size={20} color="#38A169" />
+        <View style={[styles.statIcon, { backgroundColor: '#E8EDF9' }]}>
+          <MessageSquare size={20} color="#0D2460" />
         </View>
         <View style={styles.statText}>
           <Text
@@ -41,7 +41,7 @@ const DashboardStats = ({ evalCount, consultCount }) => {
           <Text
             style={[styles.statLabel, isSmallScreen && styles.statLabelSmall]}
           >
-            Consultation
+            Consultations
           </Text>
         </View>
       </View>
