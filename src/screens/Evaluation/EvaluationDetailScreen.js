@@ -12,6 +12,7 @@ import CommentsSection from '../../components/evaluation/detail/sections/Comment
 import ResponsesSection from '../../components/evaluation/detail/sections/ResponsesSection';
 
 import useEvaluationDetail from '../../hooks/useEvaluationDetail';
+
 export default function EvaluationDetailScreen({ route }) {
   const { id } = route.params;
   const { accessToken } = useContext(AuthContext);
@@ -24,11 +25,13 @@ export default function EvaluationDetailScreen({ route }) {
   return (
     <ScrollView
       style={styles.container}
-      contentContainerStyle={styles.scrollContent}
+      contentContainerStyle={[styles.scrollContent, { paddingBottom: 100 }]}
       refreshControl={
         <RefreshControl
           refreshing={refreshing}
           onRefresh={() => fetchDetail(true)}
+          tintColor="#0D2460"
+          colors={['#0D2460']}
         />
       }
       showsVerticalScrollIndicator={false}

@@ -2,15 +2,18 @@ import { StyleSheet } from 'react-native';
 import { getFontSize } from '../utils/font';
 
 export const COLORS = {
-  bg: '#FFFFFF',
+  bg: '#F4F6FA',
   surface: '#FFFFFF',
-  text: '#0F172A',
-  muted: '#64748B',
-  primary: '#5E72E4',
-  badgeBg: '#EEF2FF',
-  badgeText: '#4F46E5',
-  emptyBorder: '#DDE3FF',
-  emptyBg: '#F7F8FF',
+  text: '#0D2460',
+  muted: '#A0AECB',
+  secondary: '#8096B8',
+  primary: '#0D2460',
+  accent: '#1A4BAD',
+  badgeBg: '#EBF1FC',
+  badgeText: '#1A4BAD',
+  border: '#E2E8F2',
+  emptyBorder: '#C5D4F0',
+  emptyBg: '#EBF1FC',
 };
 
 export const consultationStyles = StyleSheet.create({
@@ -20,8 +23,8 @@ export const consultationStyles = StyleSheet.create({
   },
 
   listContent: {
-    paddingTop: 4,
-    paddingBottom: 16,
+    paddingTop: 16,
+    paddingBottom: 100,
   },
 
   listContentEmpty: {
@@ -37,103 +40,128 @@ export const consultationStyles = StyleSheet.create({
   },
 
   loadingText: {
-    marginTop: 10,
+    marginTop: 12,
     color: COLORS.muted,
     fontSize: getFontSize(13),
+    fontFamily: 'Nunito-SemiBold',
   },
 
   card: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 10,
-    paddingHorizontal: 14,
-    marginHorizontal: 12,
-    marginTop: 6,
-    borderRadius: 12,
+    paddingVertical: 14,
+    paddingHorizontal: 16,
+    marginHorizontal: 16,
+    borderRadius: 14,
     backgroundColor: COLORS.surface,
-    shadowColor: '#000',
-    shadowOpacity: 0.03,
-    shadowRadius: 4,
-    shadowOffset: { width: 0, height: 1 },
-    elevation: 1,
+    borderWidth: 0.5,
+    borderColor: COLORS.border,
+    shadowColor: COLORS.primary,
+    shadowOpacity: 0.06,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 2 },
+    elevation: 2,
   },
 
   name: {
     fontSize: getFontSize(14),
     fontWeight: '700',
     color: COLORS.text,
+    fontFamily: 'Nunito-Bold',
   },
 
   subject: {
-    fontSize: getFontSize(12.5),
-    color: COLORS.text,
-    marginTop: 1,
+    fontSize: getFontSize(12),
+    color: COLORS.secondary,
+    marginTop: 2,
+    fontFamily: 'Nunito-SemiBold',
   },
 
   metaRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 3,
+    marginTop: 6,
   },
 
   metaText: {
-    marginLeft: 4,
+    marginLeft: 5,
     fontSize: getFontSize(11),
     color: COLORS.muted,
+    fontFamily: 'Nunito-SemiBold',
   },
 
   badge: {
     marginLeft: 10,
     paddingHorizontal: 10,
-    paddingVertical: 4,
-    borderRadius: 999,
+    paddingVertical: 5,
+    borderRadius: 20,
     backgroundColor: COLORS.badgeBg,
+    flexShrink: 0,
   },
 
   badgeText: {
-    fontSize: getFontSize(10.5),
+    fontSize: getFontSize(10),
     fontWeight: '600',
     color: COLORS.badgeText,
+    fontFamily: 'Nunito-Bold',
   },
 
   emptyWrap: {
     alignItems: 'center',
-    paddingHorizontal: 24,
+    paddingHorizontal: 32,
+    paddingTop: 48,
+  },
+
+  emptyIcon: {
+    width: 72,
+    height: 72,
+    borderRadius: 36,
+    backgroundColor: COLORS.emptyBg,
+    borderWidth: 0.5,
+    borderColor: COLORS.emptyBorder,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 20,
   },
 
   emptyTitle: {
     color: COLORS.text,
-    fontSize: getFontSize(15),
+    fontSize: getFontSize(17),
     fontWeight: '700',
+    fontFamily: 'Nunito-ExtraBold',
+    marginBottom: 6,
   },
 
   emptyText: {
-    marginTop: 6,
+    marginTop: 4,
     textAlign: 'center',
-    color: COLORS.muted,
-    fontSize: getFontSize(12),
+    color: COLORS.secondary,
+    fontSize: getFontSize(13),
+    lineHeight: 20,
+    fontFamily: 'Nunito-SemiBold',
   },
 
   retryBtn: {
-    marginTop: 12,
+    marginTop: 20,
     flexDirection: 'row',
     alignItems: 'center',
     gap: 6,
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    borderRadius: 10,
-    borderWidth: 1,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 12,
+    borderWidth: 0.5,
     borderColor: COLORS.emptyBorder,
     backgroundColor: COLORS.emptyBg,
   },
 
   retryText: {
-    color: COLORS.primary,
-    fontSize: getFontSize(12),
+    color: COLORS.accent,
+    fontSize: getFontSize(13),
     fontWeight: '700',
+    fontFamily: 'Nunito-Bold',
   },
 
   separator: {
-    height: 4,
+    height: 10,
   },
 });

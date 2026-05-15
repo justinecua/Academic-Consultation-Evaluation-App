@@ -6,12 +6,16 @@ import { formatDate, getRatingColor } from './evaluationListUtils';
 
 const EvaluationCard = ({ item, onPress }) => {
   return (
-    <TouchableOpacity style={styles.item} onPress={onPress} activeOpacity={0.7}>
+    <TouchableOpacity
+      style={styles.item}
+      onPress={onPress}
+      activeOpacity={0.75}
+    >
       <View style={styles.itemContent}>
         {/* Header */}
         <View style={styles.itemHeader}>
           <View style={styles.teacherInfo}>
-            <User size={16} color="#718096" />
+            <User size={14} color="#A0AECB" />
             <Text style={styles.teacherName} numberOfLines={1}>
               {item.teacher_name || 'Unknown Teacher'}
             </Text>
@@ -21,7 +25,7 @@ const EvaluationCard = ({ item, onPress }) => {
             <View
               style={[
                 styles.ratingPill,
-                { backgroundColor: `${getRatingColor(item.average_rating)}15` },
+                { backgroundColor: `${getRatingColor(item.average_rating)}18` },
               ]}
             >
               <Text
@@ -44,21 +48,21 @@ const EvaluationCard = ({ item, onPress }) => {
         {/* Footer */}
         <View style={styles.itemFooter}>
           <View style={styles.footerItem}>
-            <BookOpen size={14} color="#718096" />
+            <BookOpen size={13} color="#A0AECB" />
             <Text style={styles.footerText}>
               {item.college || 'No college'}
             </Text>
           </View>
 
           <View style={styles.footerItem}>
-            <Calendar size={14} color="#718096" />
+            <Calendar size={13} color="#A0AECB" />
             <Text style={styles.footerText}>{formatDate(item.date)}</Text>
           </View>
         </View>
       </View>
 
       <View style={styles.chevronContainer}>
-        <ChevronRight size={20} color="#CBD5E0" />
+        <ChevronRight size={15} color="#1A4BAD" />
       </View>
     </TouchableOpacity>
   );

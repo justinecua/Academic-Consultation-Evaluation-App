@@ -26,33 +26,39 @@ const DashboardActions = ({
         <ActionCard
           title="Start Consultation"
           description="Submit academic consultation form"
-          icon={<NotebookPen size={24} color="#5E72E4" />}
+          icon={<NotebookPen size={22} color="#1A4BAD" />}
           onPress={goToConsultation}
-          color="#5E72E4"
+          color="#1A4BAD"
+          iconBg="#EBF1FC"
         />
 
         <ActionCard
           title="Create Evaluation"
-          description="Evaluate a Faculty or Personnel"
-          icon={<MessageSquareText size={24} color="#5E72E4" />}
+          description="Evaluate a faculty or personnel"
+          icon={<MessageSquareText size={22} color="#0D2460" />}
           onPress={goToEvaluation}
-          color="#5E72E4"
+          color="#0D2460"
+          iconBg="#E8EDF9"
         />
 
         <ActionCard
           title="View Consultations"
           description={`Manage ${consultCount} submitted consultations`}
-          icon={<BarChart3 size={24} color="#38A169" />}
+          icon={<BarChart3 size={22} color="#0A7ABE" />}
           onPress={goToConsultationList}
-          color="#38A169"
+          color="#0A7ABE"
+          iconBg="#E0F4FC"
+          count={consultCount}
         />
 
         <ActionCard
           title="View Evaluations"
           description={`Manage ${evalCount} submitted evaluations`}
-          icon={<ClipboardList size={24} color="#11C8EF" />}
+          icon={<ClipboardList size={22} color="#3A5490" />}
           onPress={goToEvaluationList}
-          color="#11C8EF"
+          color="#3A5490"
+          iconBg="#EEF1F8"
+          count={evalCount}
         />
       </View>
     </View>

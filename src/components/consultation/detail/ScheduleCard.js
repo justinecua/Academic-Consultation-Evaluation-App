@@ -8,7 +8,6 @@ import { formatDate, formatTime } from './consultationDetailUtils';
 const ScheduleItem = ({ icon, label, value, sub }) => (
   <View style={styles.scheduleItem}>
     <View style={styles.scheduleIcon}>{icon}</View>
-
     <View style={styles.scheduleContent}>
       <Text style={styles.scheduleLabel}>{label}</Text>
       <Text style={styles.scheduleValue}>{value}</Text>
@@ -25,7 +24,7 @@ const ScheduleCard = ({ consultation }) => (
 
     <View style={styles.scheduleContainer}>
       <ScheduleItem
-        icon={<Calendar size={16} color="#2563EB" />}
+        icon={<Calendar size={16} color="#1A4BAD" />}
         label="Date"
         value={formatDate(consultation.date)}
       />
@@ -37,7 +36,7 @@ const ScheduleCard = ({ consultation }) => (
       />
 
       <ScheduleItem
-        icon={<MapPin size={16} color="#DC2626" />}
+        icon={<MapPin size={16} color="#0A7ABE" />}
         label="Venue"
         value={consultation.venue || '—'}
         sub={`Room ${consultation.room_number || 'N/A'}`}
