@@ -10,8 +10,8 @@ import InfoCard from '../../components/consultation/detail/InfoCard';
 import ScheduleCard from '../../components/consultation/detail/ScheduleCard';
 import TextSectionCard from '../../components/consultation/detail/TextSectionCard';
 
-const ConsultationDetailScreen = ({ route }) => {
-  const { id } = route.params;
+const ConsultationDetailScreen = ({ route, navigation }) => {
+  const { id, onDeleted } = route.params;
   const { accessToken } = useContext(AuthContext);
   const { consultation, loading, refreshing, refetch, refresh } =
     useConsultationDetail(accessToken, id);
@@ -33,7 +33,12 @@ const ConsultationDetailScreen = ({ route }) => {
       }
       showsVerticalScrollIndicator={false}
     >
-      <DetailHeader consultation={consultation} id={id} />
+      <DetailHeader
+        consultation={consultation}
+        id={id}
+        navigation={navigation}
+        onDeleted={onDeleted}
+      />
       <InfoCard consultation={consultation} />
       <ScheduleCard consultation={consultation} />
       <TextSectionCard consultation={consultation} />

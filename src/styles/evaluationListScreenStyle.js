@@ -6,6 +6,22 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#F4F6FA',
   },
+
+  listContent: {
+    paddingTop: 16,
+    paddingBottom: 100,
+  },
+
+  listContent: {
+    paddingTop: 16,
+    paddingBottom: 100,
+  },
+
+  listContentEmpty: {
+    flexGrow: 1,
+    justifyContent: 'center',
+  },
+
   header: {
     padding: 24,
     paddingBottom: 16,

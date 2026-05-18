@@ -53,9 +53,11 @@ export async function deleteConsultation(token, id) {
       `${BACKEND_API_URL}/consultation/my-consultations/${id}/delete/`,
       { headers: { Authorization: `Bearer ${token}` } },
     );
-    return response.data;
+
+    return true;
   } catch (error) {
-    throw error.response?.data || { error: 'Failed to delete consultation' };
+    console.log('Delete API error:', error.response || error);
+    throw error.response?.data?.message || 'Failed to delete consultation';
   }
 }
 

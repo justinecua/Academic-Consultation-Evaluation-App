@@ -66,3 +66,17 @@ export async function downloadEvaluationPDF(token, id) {
     throw error.response?.data || { error: 'Failed to download PDF' };
   }
 }
+
+export async function deleteEvaluation(token, id) {
+  try {
+    const response = await axios.delete(
+      `${BACKEND_API_URL}/evaluation/my-evaluations/${id}/delete/`,
+      { headers: { Authorization: `Bearer ${token}` } },
+    );
+
+    return true;
+  } catch (error) {
+    console.log('Delete API error:', error.response || error);
+    throw error.response?.data?.message || 'Failed to delete consultation';
+  }
+}

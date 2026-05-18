@@ -11,7 +11,7 @@ const DashboardStats = ({ evalCount, consultCount }) => {
       {/* Evaluations */}
       <View style={styles.statCard}>
         <View style={[styles.statIcon, { backgroundColor: '#EBF1FC' }]}>
-          <ClipboardList size={20} color="#1A4BAD" />
+          <ClipboardList size={20} color="#0D2460" />
         </View>
         <View style={styles.statText}>
           <Text

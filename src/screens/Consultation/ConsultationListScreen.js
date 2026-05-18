@@ -42,7 +42,10 @@ const ConsultationListScreen = ({ navigation }) => {
           <ConsultationCard
             item={item}
             onPress={() =>
-              navigation.navigate('ConsultationDetail', { id: item.id })
+              navigation.navigate('ConsultationDetail', {
+                id: item.id,
+                onDeleted: () => refetch(),
+              })
             }
           />
         )}

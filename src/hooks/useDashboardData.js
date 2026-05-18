@@ -1,26 +1,32 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { getEvaluationCount } from '../api/services/evaluation';
 import { getUserConsultations } from '../api/services/consultation';
 
 export const useDashboardData = accessToken => {
   const [evalCount, setEvalCount] = useState(0);
   const [consultCount, setConsultCount] = useState(0);
+  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchCounts = async () => {
-      try {
-        const evalRes = await getEvaluationCount(accessToken);
-        setEvalCount(evalRes);
+  const fetchCounts = useCallback(async () => {
+    if (!accessToken) return;
+    setLoading(true);
 
-        const consultRes = await getUserConsultations(accessToken);
-        setConsultCount(consultRes?.length || 0);
-      } catch (err) {
-        console.error('Failed to fetch counts:', err);
-      }
-    };
+    try {
+      const evalRes = await getEvaluationCount(accessToken);
+      setEvalCount(evalRes);
 
-    if (accessToken) fetchCounts();
+      const consultRes = await getUserConsultations(accessToken);
+      setConsultCount(consultRes?.length || 0);
+    } catch (err) {
+      console.error('Failed to fetch counts:', err);
+    } finally {
+      setLoading(false);
+    }
   }, [accessToken]);
 
-  return { evalCount, consultCount };
+  useEffect(() => {
+    fetchCounts();
+  }, [fetchCounts]);
+
+  return { evalCount, consultCount, loading, refetch: fetchCounts };
 };

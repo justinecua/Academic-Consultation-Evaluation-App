@@ -13,8 +13,8 @@ import ResponsesSection from '../../components/evaluation/detail/sections/Respon
 
 import useEvaluationDetail from '../../hooks/useEvaluationDetail';
 
-export default function EvaluationDetailScreen({ route }) {
-  const { id } = route.params;
+export default function EvaluationDetailScreen({ route, navigation }) {
+  const { id, onDeleted } = route.params;
   const { accessToken } = useContext(AuthContext);
   const { evaluation, loading, refreshing, error, fetchDetail, downloadPDF } =
     useEvaluationDetail(accessToken, id);
@@ -40,6 +40,9 @@ export default function EvaluationDetailScreen({ route }) {
         teacher={evaluation.teacher_name}
         subject={evaluation.subject}
         onDownload={downloadPDF}
+        evaluationId={id}
+        navigation={navigation}
+        onDeleted={onDeleted}
       />
 
       <BasicInfoSection evaluation={evaluation} />
