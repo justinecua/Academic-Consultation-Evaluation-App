@@ -1,5 +1,6 @@
-import React, { useContext } from 'react';
+import React, { useContext, useCallback } from 'react';
 import { ScrollView } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 import { AuthContext } from '../context/AuthContext';
 import { styles } from '../styles/dashboardStyle';
 import { useDashboardData } from '../hooks/useDashboardData';
@@ -12,8 +13,16 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 const DashboardScreen = ({ navigation }) => {
   const { accessToken, user } = useContext(AuthContext);
-  const { evalCount, consultCount } = useDashboardData(accessToken);
+  const { evalCount, consultCount, refetch } = useDashboardData(accessToken);
   const actions = useDashboardActions(navigation);
+
+  useFocusEffect(
+    useCallback(() => {
+      if (refetch) {
+        refetch();
+      }
+    }, [refetch]),
+  );
 
   return (
     <ScreenContainer style={styles.safe}>

@@ -9,7 +9,7 @@ import EvaluationSeparator from '../../components/evaluation/list/EvaluationSepa
 
 const EvaluationListScreen = ({ navigation }) => {
   const { accessToken } = useContext(AuthContext);
-  const { evaluations, loading, refreshing, refresh } =
+  const { evaluations, loading, refreshing, refresh, refetch } =
     useEvaluations(accessToken);
 
   if (loading) {
@@ -33,15 +33,18 @@ const EvaluationListScreen = ({ navigation }) => {
             item={item}
             onPress={() =>
               item.id &&
-              navigation.navigate('EvaluationDetail', { id: item.id })
+              navigation.navigate('EvaluationDetail', {
+                id: item.id,
+                onDeleted: () => refetch(),
+              })
             }
           />
         )}
         ItemSeparatorComponent={EvaluationSeparator}
         ListEmptyComponent={<EvaluationEmptyState onRefresh={refresh} />}
         contentContainerStyle={[
-          { paddingTop: 16, paddingBottom: 100 },
-          evaluations.length === 0 && styles.emptyList,
+          styles.listContent,
+          evaluations.length === 0 && styles.listContentEmpty,
         ]}
         showsVerticalScrollIndicator={false}
         refreshing={refreshing}

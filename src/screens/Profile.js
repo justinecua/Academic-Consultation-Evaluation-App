@@ -100,9 +100,19 @@ const ProfileScreen = ({ navigation }) => {
     </View>
   );
 
-  const privacyPolicyContent = `This application is committed to protecting and respecting your privacy. We collect personal information such as your name, username, and contact details solely for authentication and to provide a personalized experience.\n\nWe do not share your data with third parties unless required by law. Storage and processing are handled securely in compliance with local data protection regulations.`;
+  const privacyPolicyContent = `This application is committed to protecting and respecting your privacy. We collect personal information such as your name, username, email, and contact details solely for authentication and to provide a personalized experience within the app.
 
-  const aboutContent = `Assessly\n\nThis app helps users manage their profiles, access consultation forms, and evaluate classroom instructions.\n\nFeatures include profile management, teacher evaluation forms, academic consultation tracking\n\n`;
+All data collected is used only to enable app functionalities such as profile management, consultation tracking, and evaluation submissions. We do not share your personal information with third parties, except when required by law or with explicit consent.
+
+Data storage and processing are handled securely using industry-standard encryption and security measures. Access to personal information is restricted to authorized personnel only. We may use anonymized data for app improvement, analytics, and research purposes, but this data will never identify individual users.
+
+By using this app, you agree to the collection, use, and storage of your personal information as described. You have the right to access, update, or request deletion of your personal information at any time by contacting the app administrator.`;
+
+  const aboutContent = `Assessly - St. Michael's College
+
+Assessly is an academic management app designed exclusively for students, faculty, and staff of St. Michael's College. The app helps users manage their profiles, access consultation forms, and evaluate classroom instructions.
+
+This application is intended solely for the St. Michael's College community and its authorized users. Unauthorized use outside of this institution is strictly prohibited.`;
 
   const developerContent = `\nDeveloped by Justine Cua\n`;
 

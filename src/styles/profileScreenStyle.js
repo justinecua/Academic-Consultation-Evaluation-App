@@ -121,7 +121,6 @@ export const styles = StyleSheet.create({
     letterSpacing: 0.3,
   },
 
-  // ── Section Group ──────────────────────────────────────────────
   sectionGroup: {
     marginBottom: 20,
   },
@@ -137,17 +136,11 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 4,
   },
 
-  // ── Card ───────────────────────────────────────────────────────
   card: {
     backgroundColor: '#FFFFFF',
     borderRadius: 16,
     borderWidth: 0.5,
-    borderColor: '#DDE6F5',
-    shadowColor: '#0D2460',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.05,
-    shadowRadius: 8,
-    elevation: 2,
+    borderColor: '#ffffff',
     overflow: 'hidden',
     marginBottom: 12,
   },
@@ -156,13 +149,9 @@ export const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     borderRadius: 16,
     borderWidth: 0.5,
-    borderColor: '#DDE6F5',
-    shadowColor: '#0D2460',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.05,
-    shadowRadius: 8,
-    elevation: 2,
+    borderColor: '#ffffff',
     overflow: 'hidden',
+    marginBottom: 12,
     marginTop: -20,
   },
 
@@ -171,7 +160,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 18,
-    paddingVertical: 14,
+    paddingVertical: 13,
     borderBottomWidth: 0.5,
     borderBottomColor: '#EBF0FB',
   },
@@ -184,7 +173,6 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 6,
   },
 
   fieldLeft: {
